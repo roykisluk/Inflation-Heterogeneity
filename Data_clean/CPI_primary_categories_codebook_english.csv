@@ -1,0 +1,158 @@
+Code,Description
+120010,Consumer Price Index - General
+120020,CPI excluding Vegetables and Fruits
+110040,CPI excluding Housing
+120030,CPI excluding Vegetables Fruits and Housing
+110045,CPI excluding Energy
+110050,Food including Vegetables and Fruits
+120050,Food excluding Vegetables and Fruits
+120060,Bread Cereals and Pastry Products
+120070,Bread
+120080,Biscuits Cakes etc.
+120090,Flour
+120100,Pastry Products
+120110,Grain and Grain Products
+120130,Meat Poultry Fish and their Products
+120140,Beef
+120150,Other Meat Lamb and Pork
+120160,Poultry
+120170,Canned and Processed Meat
+120180,Fish
+120190,Canned and Processed Fish
+120200,Oils and Margarine
+120210,Oils
+120220,Margarine
+120230,Milk and Dairy Products
+120240,Milk
+120250,Laban Yogurt and Dairy Desserts
+120260,Cream
+120270,Butter
+120280,Cheese
+120285,Ice Cream
+120120,Eggs
+120370,Sugar Jam and Sweets
+120380,Sugar and Substitutes
+120390,Jam Honey etc.
+120400,Sweets and Chocolate
+120340,Beverages
+120350,Soft Drinks
+120360,Alcoholic Beverages
+120290,Miscellaneous Food Products
+120300,Spices Sauces Baking Products and Baby Food
+120310,Tea
+120320,Coffee
+120330,Cocoa
+150315,Prepared Salads
+120410,Meals Outside the Home
+120420,Meals at Work
+120430,Meals at Restaurants and Cafés
+120440,Groceries from Kiosks and Convenience Stores
+120040,Vegetables and Fruits
+120042,Fresh Vegetables
+120043,Fresh Fruits
+120046,Frozen Pickled and Canned Vegetables
+120047,Dried Canned and Frozen Fruits
+120450,Housing
+120490,Housing Services for Homeowners
+120460,Rent
+120510,Other Housing Expenses Brokerage Contract Drafting Insurance
+120520,Home Maintenance
+120580,Electricity Gas Water etc.
+120590,Electricity for Household Use
+120600,Gas for Household Use
+120610,Kerosene and Diesel for Home Heating
+120620,Water and Sewage Services for Household Use
+120550,Home Maintenance and Improvement
+120560,Painting Plastering etc.
+120570,Repairs Renovations and Home Maintenance
+120630,Materials and Products for Household Maintenance
+120780,Various Cleaning and Maintenance Tools
+120640,Laundry Cleaning and Pest Control Products
+120650,Other Household Needs
+120530,Municipal Taxes
+120540,Home Assistance
+120660,Furniture and Home Equipment
+120670,Furniture
+120680,Cabinets Buffets Shelves Dressers etc.
+120690,Sofas Armchairs Beds and Mattresses
+120700,Tables Chairs and Dining Sets
+120704,Furniture and Equipment for Babies
+120706,Garden and Balcony Furniture
+120810,Electrical Equipment for the Home
+120815,Large Electrical Appliances
+120840,Other Kitchen and Home Electrical Equipment e.g. Microwave Vacuum Cleaner
+120844,Electrical Equipment for Heating and Cooling
+120846,Repair Services for Household Electrical Appliances
+120750,Tableware Cooking and Baking Utensils
+120790,Tableware
+120800,Cooking and Baking Utensils
+120720,Bedding and Decorative Items for the Home
+120730,Bedding and Towels
+120740,Home Decorations
+120850,Clothing and Footwear
+120860,Clothing
+120870,Men's Outerwear
+120880,Women's Outerwear
+120890,Children's and Infants' Outerwear
+120900,Men's Underwear
+120910,Women's Underwear and Sleepwear
+120920,Children's Underwear and Sleepwear
+120930,Men's Socks
+120940,Women's Socks
+120950,Children's Socks
+120960,Miscellaneous Clothing Needs
+120965,Sportswear and Exercise Clothing
+120970,Fabrics Tailoring Services and Sewing Materials
+120990,Laundry and Dry Cleaning Services
+121000,Footwear
+121010,Men's Footwear
+121020,Women's Footwear
+121030,Children's Footwear
+121040,Shoe Repairs
+121230,Health
+121240,Medical Services
+121250,Health Insurance Services HMOs and Private Insurers
+121260,Private Medical Services
+121270,Dental Treatment
+121280,Medicines and Medical Aids
+121290,Medicines and Various Medical Supplies
+121300,Glasses and Optical Products
+121050,Education Culture and Entertainment
+121060,Educational Services
+121070,Preschool Education
+121080,Primary Education
+121090,Secondary Education
+121100,Higher Education Academic
+121110,Vocational Training Enrichment Courses and Post Secondary Education
+121120,Books and Study Supplies
+121130,Culture and Entertainment
+121140,Newspapers Weeklies and Magazines
+121150,Fiction and Non Fiction Books
+121160,Religious Needs
+121180,Plays Concerts Sports Events Cinema etc.
+121190,Hospitality Recreation and Travel
+121200,Entertainment Electronics
+121210,Hobbies
+121220,Toys for Children and Youth
+121225,Parties and Event Planning
+121320,Transport and Communication
+121330,Transportation
+121335,Public Transportation Travel
+121390,Travel Expenses Abroad and Domestic Flights
+121360,Private Vehicles and Maintenance
+121370,Driving Lessons Vehicle Rental etc.
+121400,Communication
+121410,Telephone Internet TV and Communication Products
+121420,Postal Services
+121430,Miscellaneous
+121440,Cigarettes and Tobacco
+121450,Personal Care and Cosmetics
+121460,Haircuts and Beauty Salons
+121470,Bathing and Cosmetic Needs
+121482,Baby Care Products and Accessories
+121484,Legal Services Fees Fines and Banking Services
+121480,Legal Services
+121486,Financial and Other Services
+121487,Personal Accessories such as Jewelry Watches and Bags
+121489,Jewelry Watches and Fashion Accessories
+121520,Bags Suitcases Backpacks and Wallets
