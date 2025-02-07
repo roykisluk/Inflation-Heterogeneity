@@ -64,6 +64,15 @@ primary_categories[f'Change_{start_year}_{end_year}'] = primary_categories[str(e
 top_increases = primary_categories.nlargest(top_n, f'Change_{start_year}_{end_year}')
 top_decreases = primary_categories.nsmallest(top_n, f'Change_{start_year}_{end_year}')
 
+# Calculate the average of all observations for each year
+yearly_averages = primary_categories[[str(year) for year in range(start_year, end_year + 1)]].mean().reset_index()
+yearly_averages.columns = ['Year', 'Average_Price_Index']
+
+# Display the yearly averages as a table
+print(f'Average Price Index for Each Year from {start_year} to {end_year}')
+print(tabulate(yearly_averages, headers='keys', tablefmt='pretty'))
+print('\n')
+
 # Display the top N increases and decreases as tables
 top_increases[f'Change_{start_year}_{end_year}'] = top_increases[f'Change_{start_year}_{end_year}'].round(2)
 top_decreases[f'Change_{start_year}_{end_year}'] = top_decreases[f'Change_{start_year}_{end_year}'].round(2)
