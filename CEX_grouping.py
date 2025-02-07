@@ -163,6 +163,7 @@ plt.show()
 
 # Parameters
 base_year = 2022
+
 category_level = 'product'
 category_levels = { # Category levels, in number of digits
     'primary': 2,
@@ -178,36 +179,44 @@ def level_df(df, cat_level):
 
 def weighting(df):
     weights = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
-    weights['weight'] = 0
+    weights['weight'] = 0.0
     total_consumption = total_consumption_value(df)
     for j in range(0, len(weights)):
         weights.loc[j, 'weight'] = df[df['prodcode'] == weights.loc[j, 'prodcode']]['schum'].sum() / total_consumption
     return weights
 
 def total_consumption_value(df):
-    total_consumption = 0
+    total_consumption = 0.0
     for j in range(0, len(df)):
         total_consumption += df['schum'][j]
     return total_consumption
 
 def average_price(df):
     average_prices = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
-    average_prices['price'] = 0
+    average_prices['price'] = 0.0
     for j in range(0, len(average_prices)):
         average_prices.loc[j, 'price'] = (df[df['prodcode'] == average_prices.loc[j, 'prodcode']]['mehir'] / df[df['prodcode'] == average_prices.loc[j, 'prodcode']]['kamut']).mean()
     return average_prices
 
 def Laspeyres(consumption_df_base, price_df_base, price_df_current):
     index_df = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
-    index_df['index'] = 0
-    weights=weighting(consumption_df_base)
-    average_prices_base=average_price(price_df_base)
-    average_prices_current=average_price(price_df_current)
+    index_df['index'] = 0.0
+    weights = weighting(consumption_df_base)
+    average_prices_base = average_price(price_df_base)
+    average_prices_current = average_price(price_df_current)
     for j in range(len(index_df)):
         prodcode = index_df.loc[j, 'prodcode']
-        weight = weights.loc[weights['prodcode'] == prodcode, 'weight'].values[0]
-        price_current = average_prices_current.loc[average_prices_current['prodcode'] == prodcode, 'price'].values[0]
-        price_base = average_prices_base.loc[average_prices_base['prodcode'] == prodcode, 'price'].values[0]
+        weight_row = weights.loc[weights['prodcode'] == prodcode]
+        price_current_row = average_prices_current.loc[average_prices_current['prodcode'] == prodcode]
+        price_base_row = average_prices_base.loc[average_prices_base['prodcode'] == prodcode]
+        
+        if weight_row.empty or price_current_row.empty or price_base_row.empty:
+            index_df.drop(j, inplace=True)
+            continue
+        
+        weight = weight_row['weight'].values[0]
+        price_current = price_current_row['price'].values[0]
+        price_base = price_base_row['price'].values[0]
         index_df.loc[j, 'index'] = weight * (price_current / price_base) * 100
     return index_df
 
@@ -231,16 +240,13 @@ for year in years:
     df.columns = df.columns.str.lower()
     dfs_prices[year] = df
 
-# Price indexing
-
-# Create weights for base year, at the desired category level
-
-# Level dataframes
+# Level dataframes to product level = 6 digits
 leveled_consumption_dfs = {year: level_df(dfs_consumption[year], category_level) for year in years}
 # Reset indexes for leveled dataframes
 for year in years:
     leveled_consumption_dfs[year].reset_index(drop=True, inplace=True)
 
-year=2021
+# Calculate weights and price indexes
 weights = weighting(leveled_consumption_dfs[base_year])
 price_index = Laspeyres(leveled_consumption_dfs[base_year], dfs_prices[base_year], dfs_prices[year])
+price_index.reset_index(drop=True, inplace=True)
