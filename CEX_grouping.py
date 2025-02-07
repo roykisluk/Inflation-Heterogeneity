@@ -3,9 +3,8 @@ import pyreadstat
 from tabulate import tabulate
 import matplotlib.pyplot as plt
 
-
 # Parameters
-start_year = 2022
+start_year = 2021
 end_year = 2022
 low_income_decile=1 # 1-10
 high_income_decile=9 # 1-10
@@ -19,14 +18,16 @@ years=range(start_year,end_year+1)
 folder_names_pathname='Data_clean/CEX_folder_names.csv'
 folder_names_df = pd.read_csv(folder_names_pathname)
 
+# CEX data folder
+cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/'
+
+####################################################
+
 # Load age groups
 age_groups_pathname='Data_clean/age_groups.csv'
 age_groups_df = pd.read_csv(age_groups_pathname)
 young_age_group_id = age_groups_df[(age_groups_df['min_age'] <= young_age_cutoff) & (age_groups_df['max_age'] >= young_age_cutoff)].index[0]+1
 old_age_group_id = age_groups_df[(age_groups_df['min_age'] <= old_age_threshold) & (age_groups_df['max_age'] >= old_age_threshold)].index[0]+1
-
-# CEX data folder
-cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/'
 
 # Load household data for each year
 dfs_HH = {}
@@ -150,3 +151,96 @@ plt.title('Number of Rows for Each Group')
 plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
 plt.show()
+
+
+
+
+####################################################
+# Weighting and Price Indexes
+####################################################
+
+
+
+# Parameters
+base_year = 2022
+category_level = 'product'
+category_levels = { # Category levels, in number of digits
+    'primary': 2,
+    'secondary': 3,
+    'product': 6
+}
+
+# Functions
+def level_df(df, cat_level):
+    n_digits = category_levels[cat_level]
+    df = df[df['prodcode'].astype(int).astype(str).str.len() == n_digits]
+    return df
+
+def weighting(df):
+    weights = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
+    weights['weight'] = 0
+    total_consumption = total_consumption_value(df)
+    for j in range(0, len(weights)):
+        weights.loc[j, 'weight'] = df[df['prodcode'] == weights.loc[j, 'prodcode']]['schum'].sum() / total_consumption
+    return weights
+
+def total_consumption_value(df):
+    total_consumption = 0
+    for j in range(0, len(df)):
+        total_consumption += df['schum'][j]
+    return total_consumption
+
+def average_price(df):
+    average_prices = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
+    average_prices['price'] = 0
+    for j in range(0, len(average_prices)):
+        average_prices.loc[j, 'price'] = (df[df['prodcode'] == average_prices.loc[j, 'prodcode']]['mehir'] / df[df['prodcode'] == average_prices.loc[j, 'prodcode']]['kamut']).mean()
+    return average_prices
+
+def Laspeyres(consumption_df_base, price_df_base, price_df_current):
+    index_df = pd.DataFrame(df['prodcode'].unique(), columns=['prodcode'])
+    index_df['index'] = 0
+    weights=weighting(consumption_df_base)
+    average_prices_base=average_price(price_df_base)
+    average_prices_current=average_price(price_df_current)
+    for j in range(len(index_df)):
+        prodcode = index_df.loc[j, 'prodcode']
+        weight = weights.loc[weights['prodcode'] == prodcode, 'weight'].values[0]
+        price_current = average_prices_current.loc[average_prices_current['prodcode'] == prodcode, 'price'].values[0]
+        price_base = average_prices_base.loc[average_prices_base['prodcode'] == prodcode, 'price'].values[0]
+        index_df.loc[j, 'index'] = weight * (price_current / price_base) * 100
+    return index_df
+
+# Load data
+
+# Load consumption data for each year
+dfs_consumption = {}
+for year in years:
+    subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+    data_prod_pathname = f"{cex_data_folder}{subfolder}/{subfolder}dataprod.sas7bdat"
+    df, meta = pyreadstat.read_sas7bdat(data_prod_pathname)
+    df.columns = df.columns.str.lower()
+    dfs_consumption[year] = df
+
+# Load price data for each year
+dfs_prices = {}
+for year in years:
+    subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+    data_prices_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datayoman.sas7bdat"
+    df, meta = pyreadstat.read_sas7bdat(data_prices_pathname)
+    df.columns = df.columns.str.lower()
+    dfs_prices[year] = df
+
+# Price indexing
+
+# Create weights for base year, at the desired category level
+
+# Level dataframes
+leveled_consumption_dfs = {year: level_df(dfs_consumption[year], category_level) for year in years}
+# Reset indexes for leveled dataframes
+for year in years:
+    leveled_consumption_dfs[year].reset_index(drop=True, inplace=True)
+
+year=2021
+weights = weighting(leveled_consumption_dfs[base_year])
+price_index = Laspeyres(leveled_consumption_dfs[base_year], dfs_prices[base_year], dfs_prices[year])
