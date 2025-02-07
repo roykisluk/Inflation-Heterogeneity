@@ -1,18 +1,21 @@
 import pandas as pd
 import pyreadstat
+import numpy as np
 from tabulate import tabulate
 import matplotlib.pyplot as plt
 
 # Parameters
 start_year = 2021
 end_year = 2022
-low_income_decile=1 # 1-10
-high_income_decile=9 # 1-10
-low_ses_cutoff=1 # 1-5
-high_ses_cutoff=5 # 1-5
-young_age_cutoff=25
-old_age_threshold=65
 years=range(start_year,end_year+1)
+base_year = 2022
+factor = 1 # Factor in case of missing prices. 0 = ignore, 1 = assume no change
+category_level = 'product'
+category_levels = { # Category levels, in number of digits
+    'primary': 2,
+    'secondary': 3,
+    'product': 6
+}
 
 # Load folder names
 folder_names_pathname='Data_clean/CEX_folder_names.csv'
@@ -25,14 +28,7 @@ cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/'
 
 
 # Parameters
-base_year = 2022
-year = 2021
-category_level = 'product'
-category_levels = { # Category levels, in number of digits
-    'primary': 2,
-    'secondary': 3,
-    'product': 6
-}
+
 
 # Functions
 def level_df(df, cat_level):
@@ -70,27 +66,25 @@ def Laspeyres(consumption_df_base, price_df_base, price_df_current):
     index_df = index_df.merge(weights, on='prodcode', how='left')
     index_df = index_df.merge(average_prices_base, on='prodcode', how='left', suffixes=('', '_base'))
     index_df = index_df.merge(average_prices_current, on='prodcode', how='left', suffixes=('_base', '_current'))
-    index_df.dropna(inplace=True)
-    index_df.reset_index(drop=True, inplace=True)
     total_index = 0.0
     for j in range(len(index_df)):
-        weight = index_df.loc[j, 'weight']
         price_current = index_df.loc[j, 'price_current']
         price_base = index_df.loc[j, 'price_base']
-        if price_base == 0 or pd.isna(price_base) or pd.isinf(price_base):
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid price_base")
+        if price_base == 0 or pd.isna(price_base) or np.isinf(price_base):
+            index_df.loc[j, 'index'] = factor * 100
+            print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_base")
             continue
-        if price_current == 0 or pd.isna(price_current) or pd.isinf(price_current):
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid price_current")
-            continue
-        if weight == 0 or pd.isna(weight) or pd.isinf(weight):
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid weight")
+        if price_current == 0 or pd.isna(price_current) or np.isinf(price_current):
+            index_df.loc[j, 'index'] = factor * 100
+            print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_current")
             continue
         index_df.loc[j, 'index'] = (price_current / price_base) * 100
-        total_index += weight * (price_current / price_base) * 100
-        if total_index == float('inf') or total_index == float('-inf'):
-            print(f"total_index became infinite at prodcode {index_df.loc[j, 'prodcode']}")
-            break
+    for j in range(len(index_df)):
+        weight = index_df.loc[j, 'weight']
+        # if weight == 0 or pd.isna(weight) or np.isinf(weight):
+        #     print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid weight")
+        #     continue
+        total_index += weight * index_df.loc[j, 'index']
     return index_df, total_index
 
 # Load data
@@ -120,8 +114,9 @@ for year in years:
     leveled_consumption_dfs[year].reset_index(drop=True, inplace=True)
 
 # Calculate weights and price indexes
-weights = weighting(leveled_consumption_dfs[base_year])
-df_prices_index, current_index = Laspeyres(leveled_consumption_dfs[base_year], dfs_prices[base_year], dfs_prices[year])
-df_prices_index.reset_index(drop=True, inplace=True)
+yearly_price_index={}
+df_price_index={}
+for year in years:
+    (df_price_index[year], yearly_price_index[year]) = Laspeyres(leveled_consumption_dfs[base_year], dfs_prices[base_year], dfs_prices[year])
 
 
