@@ -77,14 +77,14 @@ def Laspeyres(consumption_df_base, price_df_base, price_df_current):
         weight = index_df.loc[j, 'weight']
         price_current = index_df.loc[j, 'price_current']
         price_base = index_df.loc[j, 'price_base']
-        if price_base == 0:
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to price_base being 0")
+        if price_base == 0 or pd.isna(price_base) or pd.isinf(price_base):
+            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid price_base")
             continue
-        if price_current == 0:
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to price_current being 0")
+        if price_current == 0 or pd.isna(price_current) or pd.isinf(price_current):
+            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid price_current")
             continue
-        if weight == 0:
-            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to weight being 0")
+        if weight == 0 or pd.isna(weight) or pd.isinf(weight):
+            print(f"Skipping prodcode {index_df.loc[j, 'prodcode']} due to invalid weight")
             continue
         index_df.loc[j, 'index'] = (price_current / price_base) * 100
         total_index += weight * (price_current / price_base) * 100
