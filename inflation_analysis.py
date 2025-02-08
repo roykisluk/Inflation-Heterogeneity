@@ -40,6 +40,11 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
             df.rename(columns={'gil': 'age_group'}, inplace=True)
         dfs_IND[year] = df
 
+    # Calculate the total number of misparmb for each year
+    total_misparmb = {}
+    for year in years:
+        total_misparmb[year] = dfs_HH[year]['misparmb'].nunique()
+
     # Groups
 
     # Arabs
@@ -106,24 +111,24 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
         druze[year] = dfs_HH[year][dfs_HH[year]['religion'] == 4]
 
     return {
-        'arabs': arabs,
-        'haredi': haredi,
-        'low_income': low_income,
-        'high_income': high_income,
-        'young': young,
-        'old': old,
-        'low_SES_locality': low_SES_locality,
-        'high_SES_locality': high_SES_locality,
-        'muslim': muslim,
-        'christian': christian,
-        'druze': druze
-    }
+        'Arabs': arabs,
+        'Haredi': haredi,
+        'Low_income': low_income,
+        'High_income': high_income,
+        'Young': young,
+        'Old': old,
+        'Low_SES_locality': low_SES_locality,
+        'High_SES_locality': high_SES_locality,
+        'Muslim': muslim,
+        'Christian': christian,
+        'Druze': druze
+    }, total_misparmb
 
 
-def calculate_price_indexes(start_year, end_year, base_year, factor=1, 
-                            cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
-                            folder_names_pathname='Data_clean/CEX_folder_names.csv', 
-                            prodcode_dict_pathname='Data_clean/prodcode_dictionary_c3-c399.csv'):
+def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, factor = 1, verbose = False,
+                            cex_data_folder = '/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
+                            folder_names_pathname = 'Data_clean/CEX_folder_names.csv', 
+                            prodcode_dict_pathname = 'Data_clean/prodcode_dictionary_c3-c399.csv'):
     import pandas as pd
     import pyreadstat
     import numpy as np  
@@ -180,19 +185,22 @@ def calculate_price_indexes(start_year, end_year, base_year, factor=1,
             if price_base == 0 or pd.isna(price_base) or np.isinf(price_base):
                 index_df.loc[j, 'index'] = factor * 100
                 missing_base_prices += 1
-                print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_base")
+                if verbose==True:
+                    print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_base")
                 continue
             if price_current == 0 or pd.isna(price_current) or np.isinf(price_current):
                 index_df.loc[j, 'index'] = factor * 100
                 missing_current_prices += 1
-                print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_current")
+                if verbose==True:
+                    print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_current")
                 continue
             index_df.loc[j, 'index'] = (price_current / price_base) * 100
         for j in range(len(index_df)):
             weight = index_df.loc[j, 'weight']
             total_index += weight * index_df.loc[j, 'index']
-        print(f"Missing base prices: {missing_base_prices}")
-        print(f"Missing current prices: {missing_current_prices}")
+        if verbose==True:
+            print(f"Missing base prices: {missing_base_prices}")
+            print(f"Missing current prices: {missing_current_prices}")
         return index_df, total_index
 
     def merge_to_secondary(df):
@@ -229,6 +237,11 @@ def calculate_price_indexes(start_year, end_year, base_year, factor=1,
         df, meta = pyreadstat.read_sas7bdat(data_prices_pathname)
         df.columns = df.columns.str.lower()
         dfs_prices[year] = df
+
+    # Filter observations for relevant group
+    if group_mmb is not None:
+        for year in years:
+            dfs_prices[year] = dfs_prices[year][dfs_prices[year]['misparmb'].isin(group_mmb[year]['misparmb'])]
 
     # Filter observations with prodcode that starts with 3
     for year in years:
