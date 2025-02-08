@@ -1,0 +1,79 @@
+prodcode,description
+3,Total Consumption Expenditure
+30,Food Total Excluding Fruits And Vegetables
+301,Vegetable Oils And Products
+302,Meat And Poultry
+303,Fish
+304,Dairy Products And Eggs
+305,Sugar And Sugar Products
+306,Soft Drinks
+307,Alcoholic Beverages
+308,Meals Outside Home
+309,Various Food Products
+31,Vegetables And Fruits Total
+311,Potatoes And Sweet Potatoes
+312,Fresh Vegetables
+313,Fresh Fruits
+314,Frozen Vegetables
+315,Pickled And Preserved Vegetables
+316,Preserved And Frozen Fruits
+317,Dried Fruits
+318,Natural Fruit Juices
+32,Housing Total
+321,Government Taxes
+322,Monthly Rent
+323,Housing Services Consumption
+324,Other Housing Expenses
+33,Dwelling And Household Maintenance Total
+331,Water
+332,Electricity Gas And Fuel For Home
+333,Home Maintenance And Renovation
+334,Household Help
+335,Various Household Products
+336,Municipal Taxes
+34,Furniture And Household Equipment Total
+341,Furniture
+342,Electrical Equipment For Home
+343,Non Electrical Equipment
+344,Bed Linens And Towels
+345,Home Decoration Items
+35,Clothing And Footwear Total
+351,Mens Outerwear
+352,Womens Outerwear
+353,Childrens And Infants Outerwear
+354,Underwear Sleepwear And Socks
+355,Various Clothing Items
+356,Sewing Materials And Accessories
+357,External Cleaning And Laundry
+358,Footwear
+359,Outerwear Not Elsewhere Specified
+36,Health Total
+361,Health Insurance
+362,Dental Care
+363,Health Services Expenses
+364,Other Health Expenses
+37,Education Culture And Entertainment Total
+371,Education Services
+372,Books And Stationery
+373,Culture Sports And Entertainment Events
+374,Recreation Vacation And Trips
+375,Durable Culture And Entertainment Products
+376,Hobbies Sports Equipment And Camping
+377,Vacation Unit Purchase And Maintenance
+378,Computer Internet And Products
+38,Transport And Communication Total
+381,Public Transportation
+382,Travel Abroad
+383,Vehicle Expenses
+384,Other Transportation Expenses
+385,Mail Telephone And Communication
+39,Miscellaneous Goods And Services Total
+391,Cigarettes Tobacco And Smoking Supplies
+392,Personal Services And Cosmetics
+393,Personal Products And Cosmetics
+394,Legal And Other Services
+395,Personal Jewelry And Watches
+396,Bags Suitcases And Other Products
+397,Organization Fees And Donations
+398,Expenses Not Elsewhere Specified
+399,Not Specified Expenses

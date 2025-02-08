@@ -1,0 +1,1028 @@
+prodcode,description
+c3,Total consumption expenditure
+c30,Food (excluding vegetables and fruits) - total
+c300,Bread grains and baked products
+c300012,Regular black and white bread
+c300038,Sliced bread
+c300046,Special bread
+c300053,Regular and sweet challah
+c300061,Rolls and bagels
+c300079,Pitas
+c300087,Matzah
+c300095,BNZ bread
+c300202,Regular white flour
+c300210,Other flour
+c300228,Various grains
+c300236,Rice
+c300244,Light bread
+c300251,Brown rice
+c300269,Rising flour
+c300277,Oatmeal
+c300285,Couscous
+c300293,Semolina
+c300301,Cakes
+c300319,Cookies and biscuits
+c300327,Waffles
+c300335,Salty snacks
+c300343,Crackers
+c300350,Bagels
+c300368,Peanut snacks
+c300376,Potato snacks
+c300400,Frozen dough
+c300418,Non-frozen dough products
+c300426,Noodles and macaroni
+c300442,Cornflakes and puffs
+c300459,Ready cake mixes
+c300467,BNZ dough products
+c300475,Frozen pastry products
+c300483,Other frozen grain and dough products
+c300491,Soup almonds and croutons
+c300509,Rice cakes
+c300517,Health snacks
+c300525,Frozen malawach and jachnun
+c300533,Bread crumbs
+c300541,Cornflour
+c300558,Potato flour
+c300566,Spelt flour
+c300574,Whole wheat flour
+c300582,Matzah flour
+c300590,Rye flour
+c300608,Popcorn
+c300616,Rice snacks and rice cakes
+c300624,Frozen pizza
+c300632,Bulgur or grisha
+c300640,Quinoa
+c300657,Buckwheat
+c300665,Millet
+c300673,Wheat
+c300681,Ravioli
+c301,Vegetable oils and products
+c301010,Soybean oil
+c301028,Olive oil
+c301036,Other oil
+c301044,Margarine
+c301051,Mayonnaise products
+c301069,Tahini
+c301077,Canola oil
+c301085,Sunflower oil
+c301093,Corn oil
+c302,Meat and poultry
+c302018,Beef
+c302034,Ground beef
+c302059,Other meat and animals
+c302067,Beef liver
+c302075,Internal parts bones and legs
+c302083,Lamb and kid meat
+c302091,BNZ meat
+c302109,Whole chicken and turkey
+c302125,Other poultry
+c302133,Chicken and turkey breast
+c302141,Ground chicken and turkey
+c302158,Legs and thighs
+c302166,Chicken and turkey liver
+c302174,Chicken and turkey rolls and shawarma
+c302182,Other chicken and turkey parts
+c302190,BNZ chicken and turkey
+c302208,Sausages and pastrami from turkey and beef
+c302224,Frozen meat and poultry products
+c302232,Meat and poultry spreads and salads
+c302240,Preserved meat and poultry products
+c302323,Hot dogs
+c302331,Live chicken
+c302349,Live lamb
+c303,Fish
+c303032,Non-locally farmed fish
+c303040,Other seafood
+c303057,Canned fish
+c303065,Processed fish
+c303073,Fish spread and salad
+c303081,Ready-to-cook fish products
+c303099,BNZ fish
+c303107,Locally farmed fish
+c304,Dairy products and eggs
+c304014,Pasteurized milk
+c304022,Sterilized and UHT milk
+c304030,Other milk
+c304048,Chocolate coffee and cocoa drinks
+c304105,Butter
+c304113,Eshel white cheese and yogurt
+c304121,Milk and cheese desserts
+c304139,Sour cream
+c304147,Sweet cream
+c304154,Hard yellow cheese
+c304162,Processed cheese
+c304170,White cheese
+c304188,Salted cheese
+c304204,BNZ cheese
+c304212,Ice cream and popsicles
+c304220,Cottage cheese
+c304303,Eggs
+c304311,Organic eggs
+c304320,Goat milk
+c305,Sugar and products
+c305011,Sugar
+c305037,Sugar substitutes
+c305045,Jam and preserves
+c305052,Honey
+c305078,Candies
+c305086,Halva
+c305094,Chocolates and bonbons
+c305102,Other sweets
+c305110,Dried fruit spreads
+c305128,Chocolate and cocoa spreads
+c305136,Syrups
+c305144,Date syrup
+c305151,Other sweet spreads
+c306,Soft drinks
+c306019,Home soda
+c306027,Dark beer
+c306035,Non-carbonated soft drinks
+c306043,Carbonated soft drinks
+c306050,Mineral water
+c306068,Sweetened concentrates
+c306076,Bottle deposits
+c306084,Energy drinks
+c307,Alcoholic beverages
+c307017,Wine
+c307025,Light beer
+c307033,Brandy liqueur cognac
+c307041,Other alcoholic beverages
+c307058,Vodka
+c308,Meals outside home
+c308015,Meals at work
+c308023,Restaurant meals
+c308031,Coffee shop purchases
+c308049,Kiosk snack bar cafeteria purchases
+c308056,School meal payment
+c308064,Pub expenses
+c308072,Soup kitchen meals
+c308098,Fast food restaurant meals
+c309,Various food products
+c309013,Tea
+c309021,Coffee
+c309039,Instant coffee
+c309047,Cocoa powder
+c309054,Salt
+c309062,Baking aids
+c309070,Ready pasta and salad sauces
+c309088,Spices
+c309096,Poppy sesame coconut chia and flax seeds
+c309104,Soup powders dips and sauces
+c309120,Hummus powder mashed potato etc
+c309138,Pudding powder gelatin
+c309153,Chewing gum
+c309187,Ready meals (frozen)
+c309203,Baby food
+c309211,Dry beans
+c309229,Dry peas
+c309237,Chickpeas
+c309245,Other dry legumes
+c309252,Packaged meals
+c309260,Food delivery home
+c309278,Fresh ready food for home
+c309286,Granola
+c309294,Meat substitutes and vegetarian products
+c309302,Soy yogurt/tofu/tahini/almond products
+c309310,Soy drink / tofu
+c309328,Cheese substitutes
+c309336,Vinegar
+c309344,Mustard
+c309351,Ketchup
+c309369,Baby fruit and vegetable puree
+c309377,Coffee capsules
+c309385,Dry fava beans
+c309393,Lentils
+c309401,Rice milk
+c309419,Coconut milk cream and water
+c309427,Almond milk
+c309435,Milk powder
+c309997,BNZ food
+c31,Vegetables and fruits total
+c311,Potatoes and sweet potatoes
+c311019,Potatoes and sweet potatoes
+c312,Fresh vegetables
+c312017,Green peas
+c312025,Dry and green onions
+c312033,Garlic
+c312041,Carrots
+c312058,Lettuce
+c312066,Eggplants
+c312074,Cabbage
+c312082,Cauliflower
+c312090,Cucumbers
+c312108,Beets
+c312116,Tomatoes
+c312124,Bell peppers and pimentos
+c312132,Hot peppers
+c312140,Radish and radishes
+c312157,Zucchini
+c312165,Corn on the cob
+c312173,Fresh beans
+c312181,Green fava beans
+c312199,Other vegetables
+c312207,Herbs including leafy and root vegetables
+c312298,BNZ fresh vegetables
+c312306,Fresh mushrooms
+c312314,Pumpkin
+c312322,Broccoli
+c312330,Kohlrabi
+c312348,Okra
+c312355,Sprouts
+c312363,Parsley including root
+c312371,Coriander
+c312389,Cut vegetables for salad
+c312397,Fresh asparagus
+c312405,Fresh artichoke
+c312413,Mint
+c312421,Dill
+c312439,Celery including root
+c312447,Spinach chard beet leaves
+c313,Fresh fruits
+c313015,Oranges
+c313023,Clementines and mandarins
+c313031,Grapefruits
+c313049,Lemons
+c313056,Other citrus fruit
+c313064,Avocado
+c313072,Watermelons
+c313080,Pears
+c313098,Peaches nectarines
+c313106,Bananas
+c313114,Melons
+c313122,Apricots
+c313130,Grapes
+c313148,Pomegranates
+c313155,Plums
+c313163,Fresh figs
+c313171,Strawberries
+c313189,Apples
+c313197,Persimmons
+c313205,Mangos
+c313213,Other fresh fruits
+c313221,Kiwi
+c313239,Pomelo
+c313247,Tiny citrus
+c313254,Cherries
+c313262,Guava
+c313270,Fresh dates
+c313288,Quinces
+c313296,Prickly pear
+c313304,Loquat
+c313312,BNZ fresh fruits
+c313320,BNZ fresh fruits and vegetables
+c314,Frozen vegetables
+c314013,Frozen potato products
+c314021,Mixed frozen vegetables/frozen vegetable mix
+c314039,Individual frozen vegetables
+c315,Preserved and pickled vegetables
+c315010,Peas and carrots preserves
+c315028,Other vegetable preserves
+c315036,BNZ vegetable preserves
+c315051,Pickled cucumbers
+c315069,Olives
+c315077,Other pickled vegetables
+c315085,BNZ pickles
+c315101,Other ready salads
+c315119,Tomato preserves including paste
+c315127,Vegetable juices
+c315135,Dried vegetables
+c315143,Stuffed vegetables
+c315150,Vegetarian spreads
+c315168,Corn and bean preserves
+c315176,Hummus salad
+c315184,Tahini salad
+c315192,Eggplant salad
+c315200,Schug
+c315226,Cabbage salad
+c315234,Turkish salad / matbucha
+c315242,Mushroom preserves
+c316,Preserved and frozen fruits
+c316018,Preserved and frozen fruits
+c317,Dried fruits
+c317016,Dried figs
+c317024,Dried dates
+c317032,Raisins
+c317040,Dried plums
+c317057,Other dried fruits
+c317065,Seeds for snacking
+c317073,Nuts
+c317081,Almonds
+c317099,Peanuts
+c317107,Candied nuts
+c317115,American peanuts
+c317123,Legume snacks
+c317131,Pistachios
+c317149,Cranberries
+c317198,BNZ nuts
+c317206,Pine nuts
+c318,Natural fruit juices
+c318014,Fruit juices
+c32,Housing total
+c321,Government taxes
+c321026,Capital and lease fees
+c321034,Purchase tax
+c321042,Land registry payment
+c321059,Land authority lease fees
+c321067,Real estate capital gains tax
+c322,Monthly rent
+c322016,Key money rent
+c322024,Monthly rent for apartment or room (including maintenance in protected housing)
+c322032,Rent for other household
+c322057,Rent paid by others
+c323,Housing services consumption
+c323014,Housing services consumption for owned apartment
+c323022,Housing services consumption for key money apartment
+c323030,Housing services consumption for free housing
+c324,Other housing expenses
+c324020,Lawyer expenses for sale/rent/purchase of apartment
+c324038,Broker fees for sale/rent/purchase of apartment
+c324046,Apartment and contents insurance
+c324054,Other housing expenses
+c324062,Security company payment
+c324079,Real estate appraiser
+c33,Apartment and household maintenance
+c331,Water
+c331017,Current consumption water
+c332,Electricity gas and fuel for home
+c332015,Current consumption electricity
+c332023,Gas in containers
+c332031,Central gas
+c332049,Kerosene
+c332056,Central heating expenses (including wood)
+c332064,Apartment heating expenses (including wood)
+c333,Maintenance and home improvement
+c333013,Expenses for other craftsmen
+c333021,Paint and lime for apartment painting
+c333070,Apartment yard garden maintenance
+c333088,House committee payments
+c333104,Tools and materials
+c333120,Payment for painter handyman plasterer
+c333138,Payment for plumber
+c333146,Payment for electrician
+c333153,Payment for glazier and blinds installer
+c333161,Payment for exterminator
+c333179,Payment for gardener
+c333195,BNZ maintenance and home improvement
+c333203,Lawn mower
+c333211,Electric work tools
+c333229,Screws and nails
+c334,Home help
+c334011,Childcare worker in family home
+c334029,House help and cook
+c334037,Baby sitting
+c334045,National insurance for helper and caregiver
+c334052,Caregiver for elderly or disabled outside home
+c334060,Nursing care worker in your home
+c335,Various household items
+c335018,Laundry powder
+c335026,Other laundry materials
+c335034,Cleaning and disinfection materials for home
+c335042,Dish cleaning materials
+c335059,Other cleaning supplies
+c335075,Air fresheners and deodorizers
+c335083,Candles
+c335117,Floor cloths and rags
+c335125,Various household items
+c335190,BNZ household items
+c335208,Plastic bags shopping bags
+c335216,Reusable bags fabric bags
+c335224,Pest control materials
+c335232,Pool cleaning materials
+c335240,Baking paper
+c335257,Food bags
+c335265,Charcoal and charcoal lighter
+c335273,Aluminum foil
+c335281,Cling wrap
+c335299,Garbage bags
+c335307,Cleaning gloves
+c336,Municipal taxes (arnona)
+c336016,Arnona
+c336024,Settlement taxes
+c336032,Education fee
+c336040,Security fee
+c336057,Balance tax
+c336065,Other settlement tax
+c34,Furniture and household equipment total
+c341,Furniture
+c341016,Display cabinet
+c341024,Sofa
+c341032,Living room table
+c341040,TV stand
+c341057,Bookcase shelving unit (not including single shelves)
+c341065,Other furniture for living room kitchen dining area
+c341107,Clothes closet
+c341115,Beds (without mattress)
+c341123,Dressers
+c341131,Vanity table
+c341149,Writing desk/office desk/computer desk
+c341156,Youth sofa
+c341164,Other bedroom or children's room furniture
+c341172,Shoe cabinet
+c341214,Baby crib/cradle
+c341222,Baby stroller/pushchair
+c341248,Safety seat and carrier
+c341255,Changing table
+c341263,Baby high chair
+c341271,Other baby equipment
+c341289,Baby carrier
+c341297,Baby bath
+c341305,Baby swing/trampoline
+c341321,Table for kitchen and dining area
+c341347,Plastic chairs for kitchen and dining area
+c341354,Chairs for kitchen or dining area
+c341404,Umbrella
+c341412,Garden and patio table (including folding table)
+c341420,Garden and patio chairs and loungers
+c341438,Other patio and garden items
+c341446,Garden pool
+c341453,Storage shed
+c341529,Computer chair / office chair
+c341545,Bathroom cabinet
+c341552,Shelves
+c341610,Furniture repair and services
+c341628,Armchair including ottoman pouf
+c342014,Refrigerator
+c342022,Microwave
+c342030,Freezer (separate from refrigerator)
+c342048,Oven and stovetop (combined system)
+c342055,Oven for baking only (separate from stovetop)
+c342063,Grinder food processor electric mixer
+c342071,Dishwasher
+c342089,Hood vent
+c342097,Toaster grill or toaster oven
+c342105,Electric pot or beater
+c342113,Electric kettle
+c342121,Other kitchen electrical appliances
+c342139,Clothes dryer (separate from washing machine)
+c342147,Washing machine
+c342162,Sewing machine
+c342170,Fan
+c342188,Electric or robotic vacuum cleaner (not including small device for home and car)
+c342196,Iron
+c342204,Electric radiator
+c342212,Other electric heater
+c342220,Lamps chandeliers and lampshades
+c342246,Neon lamps and light bulbs
+c342253,Refrigerator insurance
+c342261,Washing machine / dryer insurance
+c342279,Other electrical equipment insurance
+c342287,Electrical equipment service and repair - washing machine dryer air conditioner
+c342295,Other electrical equipment
+c342303,Electrical equipment not elsewhere specified
+c342337,Other electrical product repair
+c342345,Air conditioner
+c342360,Shabbat hot plate
+c342378,Electric juice squeezer
+c342386,Coffee machine coffee grinder
+c342394,Water purification system/device or mineral water dispenser
+c342402,Air conditioner insurance
+c342410,Alarm clock
+c342428,Kitchen electrical appliance repairs - oven stovetop microwave etc
+c342444,Accessories and maintenance for water purifier or water facility
+c343046,Cooking stovetop separate from oven (not including Shabbat hot plate)
+c343061,Other furniture and equipment
+c343079,Bucket basin boiler trash can
+c343087,House brushes and brooms
+c343095,Other household items
+c343129,Household items and equipment repairs
+c343137,Other equipment and furniture (up to 100 NIS)
+c343210,Plates and coasters
+c343228,Coffee set
+c343236,Spoons forks and knives
+c343244,Cups mugs and glasses
+c343251,Disposable plates cups and cutlery
+c343269,Cooking and baking utensils
+c343285,Serving dishes and trays
+c343293,Strainers fruit crushers graters
+c343319,Soda siphon SodaStream
+c343327,Kitchen storage containers
+c343343,Other kitchen utensils
+c343350,Soda gas refills
+c343368,Dinnerware set - plates set
+c343376,Gas grill for garden
+c343384,Rental of other home product
+c344010,Blankets
+c344028,Pillowcases and pillows
+c344036,Bed linens
+c344077,Other bedding items
+c344093,Mattresses
+c344101,Kitchen towels
+c344119,Bath towels
+c344127,Bed or living room covers
+c344192,Bedding and towels not elsewhere specified
+c345017,Pictures
+c345033,Carpets
+c345041,Ready-made curtains and curtain fabrics
+c345058,Upholstery fabrics
+c345066,Tablecloths
+c345074,Bathroom and kitchen rugs
+c345082,Decorative items
+c345090,Flowers and plants
+c345108,Vases and flower holders
+c345116,Other home decoration products
+c345124,Carpet cleaning
+c345140,Table napkins (cloth and paper)
+c345157,Mirrors
+c345165,Home clocks
+c345173,Sculptures or vases
+c351015,Men's suit
+c351023,Trousers
+c351031,Men's coat
+c351049,Sweater or vest
+c351056,Men's shirt
+c351064,Men's tracksuit
+c351072,Men's robe
+c351080,Men's swimsuit
+c351098,Men's hat and fedora
+c351197,Men's outerwear not elsewhere specified
+c352013,Women's suit
+c352021,Dress
+c352039,Trousers
+c352047,Skirt
+c352054,Women's coat
+c352062,Sweater vest
+c352070,Women's blouse
+c352088,Women's tracksuit
+c352096,Women's robe
+c352104,Women's swimsuit
+c352112,Body wear
+c352120,Women's hat
+c352195,Women's outerwear not elsewhere specified
+c353201,School shirt
+c353011,Children's suit
+c353029,Trousers
+c353037,Coat
+c353045,Sweater vest
+c353052,Children's shirt
+c353060,Children's tracksuit
+c353078,Dress
+c353086,Skirt
+c353094,Children's swimsuit
+c353102,Baby clothes
+c353193,Children's outerwear not elsewhere specified
+c354019,Men's pajamas
+c354027,Men's undershirt and underwear
+c354035,Women's pajamas and nightgown
+c354043,Women's underwear
+c354050,Slip camisole combination
+c354068,Bra and corset
+c354076,Children's sleepwear
+c354084,Children's undershirt and underwear
+c354100,Men's socks
+c354118,Women's socks
+c354126,Children's socks
+c354175,Sleepwear not elsewhere specified
+c354183,Underwear not elsewhere specified
+c354191,Socks not elsewhere specified
+c355016,Belts ties and gloves
+c355024,Scarves and head scarves
+c355032,Hats and caps for children or not elsewhere specified
+c355040,Sports suits
+c355065,Various clothing items
+c356014,Sewing and tailoring
+c356022,Fabrics and textiles
+c356030,Sewing and knitting tools
+c356048,Materials for sewing and knitting
+c356079,Sewing tools and materials not elsewhere specified
+c357012,Laundry and dyeing at laundromat
+c357020,Dry cleaning
+c358010,Men's shoes
+c358028,Men's sandals
+c358036,Men's boots and galoshes
+c358044,Men's house shoes
+c358051,Women's shoes
+c358069,Women's boots and galoshes
+c358077,Women's house shoes
+c358085,Children's shoes
+c358093,Children's sandals
+c358101,Children's boots and galoshes
+c358119,Children's house shoes
+c358127,Shoe products
+c358135,Shoe repair and polishing
+c358143,Men's sports shoes
+c358150,Women's sports shoes
+c358168,Children's sports shoes
+c358176,Women's sandals
+c358192,Footwear not elsewhere specified
+c359992,Outerwear not elsewhere specified
+c361063,Health insurance with insurance company
+c361071,Other health insurance
+c361089,Nursing care insurance
+c362012,Dental treatments
+c362020,Orthodontics / teeth straightening
+c362038,Oral and jaw surgeries
+c362046,X-ray at dental imaging center
+c362054,Dental insurance
+c363010,Visit to private or specialist doctor
+c363028,Private medical surgery
+c363036,Laboratory tests and imaging
+c363044,Alternative and complementary treatments
+c363051,Hospital hospitalization
+c363069,Private nurse ambulance and emergency room
+c363077,Psychiatric or psychological treatment
+c363085,Keeping relatives in private nursing home
+c363093,Day centers for elderly and disabled
+c363101,Stay in recovery homes
+c363143,Rehabilitation and developmental treatments
+c363150,Keeping relatives in nursing care hospital
+c363168,Private cosmetic surgery
+c363176,Aesthetic treatments
+c363184,Dietitian (through HMO)
+c363192,Medical treatments such as radiation chemotherapy surrogacy fertility and IVF
+c364018,Medications purchased at HMO
+c364026,Medications purchased at pharmacy
+c364034,Cotton wool tampons and bandages
+c364042,Other medical materials
+c364059,Glasses and lenses (including optical sunglasses)
+c364067,Contact lenses
+c364075,Sunglasses (non-optical)
+c364083,Rental or purchase of rehabilitation devices or medical equipment
+c364091,Medications not elsewhere specified
+c364109,Other health expenses
+c364117,Repairs and products for glasses
+c364125,Prescription medications purchased at HMO
+c364133,Non-prescription medications purchased at HMO
+c364141,Prescription medications purchased at pharmacy
+c364158,Non-prescription medications purchased at pharmacy
+c364166,Prescription medications without specified purchase location
+c364174,Non-prescription medications without specified purchase location
+c364182,Weight loss products
+c364190,Oral cavity products (including toothbrush and toothpaste)
+c364208,Vitamins without prescription including natural medicines
+c364216,Treatment for acne and lice
+c364224,Medical alcohol/disinfectant
+c364232,Thermometer
+c364240,Pregnancy test
+c364257,Blood pressure monitor
+c364265,First aid kit
+c364281,Vaccination
+c364299,Medical cannabis
+c364307,Contraceptives
+c364315,Protein powder and drink (not including high-protein dairy products)
+c364323,Corona tests (including serological testing)
+c371013,Home caregiver
+c371021,Daycare nursery toddler center private kindergarten
+c371039,Religious study room
+c371047,Mandatory and pre-mandatory kindergarten
+c371054,Elementary school
+c371062,Middle school
+c371070,Academic high school
+c371088,Vocational agricultural high school
+c371096,External school
+c371104,Post-secondary school
+c371112,Academic institution
+c371120,Open university
+c371138,Other educational institutions
+c371146,Boarding school payments
+c371153,Keeping relatives in educational institutions
+c371161,After-school program or children's club
+c371179,Tutoring for students
+c371187,Music and instrument lessons and courses
+c371195,Drawing sculpture photography and handicraft lessons and courses
+c371203,Exercise floor exercise fitness
+c371211,Various computer studies
+c371229,Other professional lessons and courses
+c371237,Courses for university entrance exams or matriculation preparation
+c371245,Language learning courses
+c371252,Enrichment classes and lecture subscriptions
+c371260,Other classes and courses
+c371278,Payment for exams
+c371286,Payment for student dormitories
+c371294,Educational expenses not elsewhere specified
+c371302,Textbooks
+c371310,Notebooks
+c371328,Writing drawing and drafting tools
+c371336,Other paper and writing equipment
+c371344,Pocket calculator
+c371351,Office equipment
+c371369,Book series
+c371377,Electronic dictionary and planner
+c371385,Books and writing instruments not elsewhere specified
+c371393,Dance and choreography lessons and courses
+c371401,Drama and other performing arts lessons and courses
+c371419,Higher yeshiva/kollel
+c371427,Studies at special education institution
+c371435,Swimming class
+c371443,Ball games class such as football basketball
+c371450,Animal/horse riding class
+c371468,Chess/cards/board games class
+c371476,Design fashion sewing course
+c371484,Professional cooking/pastry course
+c371492,Beauty professions course - cosmetics and hair styling
+c371500,Treatment or therapy study course
+c371518,Psychometric/matriculation course
+c371526,Weight loss workshop
+c371534,Bar mitzvah workshop
+c371542,Parenting workshop / birth preparation
+c371559,Cooking workshop
+c371567,Martial arts such as judo karate
+c371575,Tennis class
+c371591,Math-science tutoring
+c371609,English tutoring
+c371617,Hebrew and language tutoring
+c371625,Envelopes
+c372011,Daily newspaper
+c372029,Daily newspaper subscription
+c372037,Magazines and publications
+c372045,Magazine and publication subscriptions
+c372060,Other books
+c372094,Library subscription
+c372144,Coloring book
+c372151,Album
+c372177,Religious books
+c373019,Movie tickets
+c373027,Cultural performance subscription
+c373035,Cultural performance entrance tickets
+c373043,sports games subscription
+c373050,sports game tickets
+c373068,subscription to fitness sports and pool club
+c373076,entrance fees for pool or beach
+c373084,other subscription
+c373100,event at children's club or playground
+c373118,event at hall or garden venue including hotels
+c373126,event at restaurant or cafe
+c373134,event at synagogue or rabbinate
+c373142,event at private location
+c373159,event at other location
+c373167,photography expenses
+c373175,orchestra
+c373183,beauty salon / bridal services
+c373191,flower arrangement
+c373209,rabbi mohel
+c373217,other event expense
+c373225,entrance to nightclubs and parties
+c373258,membership fees for youth movements social organizations
+c373266,birthday party expenses
+c373282,museum subscription
+c373308,museum entrance
+c373316,payment for seminars conferences and one-time workshops
+c373324,event designer
+c373332,bar drinks / dessert bar
+c373340,game stations / activities
+c373357,event at respondent's home
+c373407,cultural sports and entertainment events
+c373415,gym entrance fee
+c373423,concert entrance fee
+c373431,internet site subscription
+c374017,hospitality house in kibbutz or moshav
+c374025,field school campsite camping
+c374033,hotel
+c374041,rental of room or apartment for vacation
+c374058,youth hostel
+c374066,children's summer camp
+c374074,day trip without accommodation
+c374082,other trips in Israel
+c374090,vacation village
+c374116,sailing including tubes kayaks
+c374124,jeep and ATV trips
+c374140,extreme activities such as skydiving scuba diving
+c374157,entrance and subscription to nature parks and gardens
+c374165,other recreational activity
+c374173,vacation unit or timeshare owned by household
+c374181,vacation in relatives apartment without payment
+c374199,rural accommodation
+c374207,horseback riding trips
+c374215,entrance to amusement park
+c374223,entrance to water park
+c374231,entrance to arcade laser tag bowling simulator
+c374249,entrance to zoo
+c374256,entrance to escape room
+c374298,other trip with accommodation in Israel
+c375014,radio radio tape
+c375022,stereo system including karaoke and speakers
+c375030,television
+c375055,video camera
+c375063,satellite dish
+c375105,records
+c375121,video and audio cassettes
+c375147,musical instruments
+c375162,home theater system including DVD
+c375220,camera for photos
+c375246,photo films development and printing
+c375253,other entertainment expenses
+c375279,other equipment for vehicle
+c375287,repair of sports equipment/musical instruments
+c375295,durable cultural items
+c375303,DVD and video rentals
+c375311,car audio system
+c375337,alarm automatic locking
+c375345,media player
+c375360,digital converter
+c375378,headphones
+c375386,streamer
+c375394,remote controls for TV AC etc
+c375402,router
+c375410,computer battery or charger
+c375428,musical instrument repair
+c376012,beach and picnic equipment
+c376020,fitness equipment
+c376038,other sports equipment
+c376046,balls
+c376053,collection hobbies
+c376087,pet purchase
+c376095,veterinary visit
+c376103,pet food
+c376111,other pet maintenance
+c376129,weapon purchase and license
+c376137,pet house
+c376145,pet grooming
+c376152,treadmill
+c376160,weights/springs/pull-up bars
+c376236,other hobby products
+c376244,handheld electronic games
+c376251,toys
+c376269,games
+c376277,lottery lotto toto
+c376285,pocket money
+c376293,religious items
+c376301,durable toys and hobbies
+c376319,lottery subscription
+c376327,scooter (non-electric)
+c376335,roller blades/roller skates
+c376343,religious silver items
+c376350,game console
+c376376,costumes including accessories
+c377010,vacation unit purchase
+c377028,vacation unit maintenance
+c378018,computer
+c378026,printer scanner multifunction printer fax
+c378034,computer accessories like keyboard mouse
+c378059,software computer games learning programs gaming discs
+c378075,other computer accessories
+c378117,computer upgrade or repair
+c378125,printer ink
+c378133,computer monitor
+c378141,tablet computer
+c378182,webcam
+c378190,USB flash drive
+c378208,computer speakers
+c378216,external hard drive
+c381012,bus travel
+c381020,shared taxi travel
+c381038,special taxi travel
+c381053,train travel
+c381061,domestic flight
+c381095,transportation expenses and shuttles
+c381103,transportation to work
+c381111,transportation to school
+c382010,organized trip abroad
+c382028,other trip abroad
+c382036,expenses while abroad
+c382051,passport expenses
+c382069,expenses for relatives travel abroad
+c382077,travel insurance abroad
+c383018,bicycles (non-electric)
+c383026,two-wheeler purchase/sale
+c383042,in-kind consumption for non-owned vehicle
+c383059,maintenance and repairs for motorcycle scooter
+c383067,two-wheeler license
+c383075,vehicle license
+c383083,registration fee and ownership transfer
+c383091,mandatory insurance for two-wheeler
+c383109,third party insurance for two-wheeler
+c383117,mandatory car insurance
+c383125,comprehensive car insurance
+c383133,third party car insurance
+c383158,comprehensive insurance for two-wheeler
+c383166,fuel and oils for vehicles
+c383174,vehicle parts purchase
+c383182,periodic maintenance
+c383190,engine replacement or overhaul
+c383208,body work and paint
+c383216,clutch or transmission replacement
+c383224,other vehicle repairs
+c383232,fixed expenses allocation for non-owned vehicle
+c383240,fuel allocation for non-owned vehicle
+c383257,maintenance allocation for non-owned vehicle
+c383265,used car purchase
+c383273,other vehicle expenses
+c383281,car wash
+c383299,unspecified vehicle expenses
+c383307,repair of car accessories like AC alarm
+c383315,subscription for vehicle tracking system
+c383323,vehicle appraiser
+c383349,driving license renewal
+c383356,GPS navigation system
+c383364,reverse sensors
+c383380,front/rear car camera
+c383398,private leasing payment
+c383406,leased car purchase (payment percentage for private leasing)
+c383414,electric bicycles
+c383422,employer vehicle ownership
+c383430,new car purchase
+c383448,vehicle license for other household member
+c383455,mandatory insurance for other household member's vehicle
+c383463,comprehensive insurance for other household member's vehicle
+c383471,third party insurance for other household member's vehicle
+c383489,helmets
+c383497,electric scooter including hoverboard
+c383505,tire replacement
+c383513,battery replacement
+c384016,driving lessons
+c384032,household contents moving
+c384040,shipping and other expenses
+c384057,parking payment
+c384065,road toll payment
+c384073,car rental for domestic travel
+c384081,bicycle rental
+c384099,preventive driving course
+c384107,toll road subscription
+c384115,parking subscription
+c384123,car wash subscription
+c384131,other vehicle service subscription
+c385013,landline phone current account
+c385021,mobile phone current account
+c385047,mobile phone purchase
+c385054,landline phone purchase
+c385070,other electronic products
+c385088,stamps postcards and air mail fees
+c385096,postal packages
+c385104,post office box rental
+c385112,international calls telecards bezeqcard public phone
+c385138,television or telephone rental
+c385153,repairs and accessories for phone and fax
+c385161,mobile phone application
+c385179,internet subscription
+c385187,mobile phone hands-free device
+c385195,mobile phone current account for non-household members
+c385203,communication package
+c391011,imported cigarettes
+c391029,cigars and pipe tobacco
+c391037,smoking implements and accessories
+c391045,domestic cigarettes
+c391052,hookah and hookah products
+c391060,cigarette papers and filters
+c391102,electronic cigarette
+c391110,cigars
+c391078,unspecified cigarettes
+c392019,men's haircut and shaving
+c392027,women's haircut
+c392035,children's haircut
+c392043,cosmetic treatment
+c392050,mikveh
+c392068,other personal service
+c392092,unspecified hairdressing
+c392100,spa and baths
+c392118,tattoo
+c392126,entrance to public services
+c393017,bath soap
+c393025,hair products
+c393033,shaving items and shaving cream
+c393041,electric shaver
+c393058,hair dryer blow dryer
+c393066,electric hair removal device
+c393074,other electrical device for personal use
+c393082,cosmetics and makeup products
+c393090,other cosmetic products
+c393116,toilet paper
+c393124,handkerchiefs and napkins (paper fabric)
+c393132,other products
+c393140,tips
+c393157,hair accessories
+c393165,face masks - cloth and paper
+c393173,alcohol gel
+c394015,lawyer for court representation
+c394023,fines
+c394031,rabbinate services marriage registration
+c394049,purchase tax on non-residential apartment
+c394056,bank services
+c394072,customs payment
+c394080,risk and accident insurance
+c394098,unspecified insurance
+c394106,funeral and burial expenses
+c394114,photocopies and prints
+c394122,advertisement in newspaper or internet
+c394130,fees and certification payments
+c394148,payment for special services
+c394155,architect
+c394163,engineer
+c394171,interior designer
+c394189,personal coach/coaching
+c394197,other financial and legal services
+c394205,religious advocate
+c394213,lawyer for administrative matters
+c394221,consultation with spiritual advisors
+c395012,rings (over 100 NIS)
+c395020,necklace/pendant (over 100 NIS)
+c395038,other jewelry
+c395046,inexpensive jewelry (up to 100 NIS)
+c395053,men's wristwatch (over 100 NIS)
+c395061,women's wristwatch (over 100 NIS)
+c395079,wristwatch (up to 100 NIS)
+c395087,jewelry and watch repair
+c395095,other personal items
+c395103,smart watch
+c395129,earrings (over 100 NIS)
+c395137,bracelet (over 100 NIS)
+c396010,wallets and cases
+c396028,bags backpacks and satchels
+c396036,suitcases
+c396051,umbrellas
+c396069,products for babies
+c396077,diapers for babies
+c396085,adult diapers
+c396093,unspecified other products
+c396101,wet wipes
+c397018,professional organization membership fees
+c397067,donations
+c398016,unspecified expenses
