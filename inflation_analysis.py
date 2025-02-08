@@ -1,8 +1,10 @@
-def grouping(start_year=2021, end_year=2022, low_income_decile=1, high_income_decile=9, 
-                          low_ses_cutoff=1, high_ses_cutoff=5, young_age_cutoff=25, old_age_threshold=65, 
-                          folder_names_pathname='Data_clean/CEX_folder_names.csv', 
-                          cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
-                          age_groups_pathname='Data_clean/age_groups.csv'):
+def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/",
+            low_income_decile=1, high_income_decile=9, 
+            low_ses_cutoff=1, high_ses_cutoff=5, 
+            young_age_cutoff=25, old_age_threshold=65, 
+            folder_names_pathname='Data_clean/CEX_folder_names.csv', 
+            age_groups_pathname='Data_clean/age_groups.csv'):
+    
     import pandas as pd
     import pyreadstat  
 
@@ -81,12 +83,12 @@ def grouping(start_year=2021, end_year=2022, low_income_decile=1, high_income_de
     # Low SES (socioeconomic status) of locality
     low_SES_locality = {}
     for year in years:
-        low_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] <= 1]
+        low_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] <= low_ses_cutoff]
 
     # High SES (socioeconomic status) of locality
     high_SES_locality = {}
     for year in years:
-        high_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] >= 5]
+        high_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] >= high_ses_cutoff]
 
     # Muslim
     muslim = {}
@@ -103,14 +105,25 @@ def grouping(start_year=2021, end_year=2022, low_income_decile=1, high_income_de
     for year in years:
         druze[year] = dfs_HH[year][dfs_HH[year]['religion'] == 4]
 
-    all_group_dfs = [arabs, haredi, low_income, high_income, young, old, low_SES_locality, high_SES_locality, muslim, christian, druze]
-    return all_group_dfs
+    return {
+        'arabs': arabs,
+        'haredi': haredi,
+        'low_income': low_income,
+        'high_income': high_income,
+        'young': young,
+        'old': old,
+        'low_SES_locality': low_SES_locality,
+        'high_SES_locality': high_SES_locality,
+        'muslim': muslim,
+        'christian': christian,
+        'druze': druze
+    }
 
 
-def calculate_price_indexes(start_year=2019, end_year=2022, base_year=2019, factor=1, 
-                                folder_names_pathname='Data_clean/CEX_folder_names.csv', 
-                                cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
-                                prodcode_dict_pathname='Data_clean/prodcode_dictionary_c3-c399.csv'):
+def calculate_price_indexes(start_year, end_year, base_year, factor=1, 
+                            cex_data_folder='/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
+                            folder_names_pathname='Data_clean/CEX_folder_names.csv', 
+                            prodcode_dict_pathname='Data_clean/prodcode_dictionary_c3-c399.csv'):
     import pandas as pd
     import pyreadstat
     import numpy as np  
@@ -266,4 +279,4 @@ def calculate_price_indexes(start_year=2019, end_year=2022, base_year=2019, fact
     # Merge descriptions into combined_primary_df
     combined_primary_df = combined_primary_df.merge(prodcode_dict_df, on='prodcode', how='left')
 
-    return combined_df, combined_secondary_df, combined_primary_df
+    return combined_df, combined_secondary_df, combined_primary_df, yearly_price_index
