@@ -113,12 +113,12 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
     return {
         'Arabs': arabs,
         'Haredi': haredi,
-        'Low_income': low_income,
-        'High_income': high_income,
+        'Low_inc': low_income,
+        'High_inc': high_income,
         'Young': young,
         'Old': old,
-        'Low_SES_locality': low_SES_locality,
-        'High_SES_locality': high_SES_locality,
+        'Low_SES': low_SES_locality,
+        'High_SES': high_SES_locality,
         'Muslim': muslim,
         'Christian': christian,
         'Druze': druze
