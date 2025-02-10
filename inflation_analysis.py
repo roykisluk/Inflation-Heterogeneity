@@ -132,6 +132,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
     import pandas as pd
     import pyreadstat
     import numpy as np  
+    from tqdm import tqdm
 
     years = range(start_year, end_year + 1)
 
@@ -231,7 +232,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
 
     # Load price data for each year
     dfs_prices = {}
-    for year in years:
+    for year in tqdm(years, desc="Loading price data"):
         subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
         data_prices_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datayoman.sas7bdat"
         df, meta = pyreadstat.read_sas7bdat(data_prices_pathname)
@@ -250,7 +251,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
     # Calculate weights and price indexes
     yearly_price_index = {}
     df_price_index = {}
-    for year in years:
+    for year in tqdm(years, desc="Calculating price indexes"):
         df_base, df_current = keep_shared_prodcodes(dfs_prices[base_year], dfs_prices[year])
         df_price_index[year], yearly_price_index[year] = Laspeyres(df_base, df_current)
 
