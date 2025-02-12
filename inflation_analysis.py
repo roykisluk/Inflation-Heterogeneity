@@ -490,6 +490,8 @@ def price_index_over_time(group_analysis):
         years = list(price_indexes.keys())
         indexes = list(price_indexes.values())
         plt.plot(years, indexes, label=group)
+        for i, year in enumerate(years):
+            plt.text(year, indexes[i], group, fontsize=8, ha='right')
 
     plt.xlabel('Year')
     plt.ylabel('Price Index')
@@ -498,21 +500,21 @@ def price_index_over_time(group_analysis):
     plt.grid(True)
     plt.show()
 
-def top_abs_weight_differences(weights_comparison_groups, weights_comparison_control, top_n=10):
+def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
     import matplotlib.pyplot as plt
     import pandas as pd
 
-    n_groups = len(weights_comparison_groups)
+    n_groups = len(comparison_groups)
     nrows = (n_groups // 2) + (1 if n_groups % 2 != 0 else 0)
     ncols = 2
-    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(20, 15), sharey=False)
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10 * ncols, 5 * nrows), sharey=False)
     axes = axes.flatten()
 
     weights_diff_df = {}
-    for group in weights_comparison_groups.keys():
+    for group in comparison_groups.keys():
         # Calculate the weight differences between the group and the comparison group
-        weights_diff_df[group] = weights_comparison_groups[group].copy()
-        weights_diff_df[group]['weight_diff'] = weights_diff_df[group]['weight'] - weights_comparison_control['weight']
+        weights_diff_df[group] = comparison_groups[group].copy()
+        weights_diff_df[group]['weight_diff'] = weights_diff_df[group]['weight'] - control_group['weight']
 
         # Sort by the weight differences in descending order
         sorted_weights_diff_df = weights_diff_df[group].sort_values(by='weight_diff', ascending=True)
@@ -531,44 +533,53 @@ def top_abs_weight_differences(weights_comparison_groups, weights_comparison_con
         top_n_weights_diff_df = pd.concat([top_n_positive, top_n_negative])
 
         # Plot the top n largest gaps
-        axes[list(weights_comparison_groups.keys()).index(group)].barh(top_n_weights_diff_df['description'], top_n_weights_diff_df['weight_diff'], color='skyblue')
-        axes[list(weights_comparison_groups.keys()).index(group)].set_title(group)
-        axes[list(weights_comparison_groups.keys()).index(group)].set_xlabel('Weight Difference')
-        axes[list(weights_comparison_groups.keys()).index(group)].set_ylabel('Description')
-        axes[list(weights_comparison_groups.keys()).index(group)].grid(True)
+        axes[list(comparison_groups.keys()).index(group)].barh(top_n_weights_diff_df['description'], top_n_weights_diff_df['weight_diff'], color='skyblue')
+        axes[list(comparison_groups.keys()).index(group)].set_title(group)
+        axes[list(comparison_groups.keys()).index(group)].set_xlabel('Weight Difference')
+        axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
+        axes[list(comparison_groups.keys()).index(group)].grid(True)
 
     plt.tight_layout()
     plt.show()
 
-def top_price_increase_contributors(group_analysis, top_n=10):
+def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10):
     import matplotlib.pyplot as plt
+    import pandas as pd
 
-    fig, axes = plt.subplots(nrows=4, ncols=3, figsize=(20, 15), sharey=False)
+    n_groups = len(comparison_groups)
+    nrows = (n_groups // 2) + (1 if n_groups % 2 != 0 else 0)
+    ncols = 2
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10 * ncols, 5 * nrows), sharey=False)
     axes = axes.flatten()
 
-    for i, (group, analysis) in enumerate(group_analysis.items()):
-        secondary_df = analysis['combined_secondary_df']
-        # Filter for increases in price indexes
-        increased_price_df = secondary_df[secondary_df['price_index'] > 100]
-        # Calculate the contribution to the yearly price index
-        increased_price_df = increased_price_df.copy()  # Ensure you're working with a copy
-        increased_price_df.loc[:, 'contribution'] = increased_price_df['price_index'] * increased_price_df['weight']    
-        # Sort by contribution in descending order
-        top_contributors = increased_price_df.sort_values(by='contribution', ascending=False).head(top_n)
-        
-        # Replace NaN values in 'description' with a placeholder text
-        top_contributors['description'] = top_contributors['description'].fillna('No Description')
-        
-        # Plot the top contributors
-        axes[i].barh(top_contributors['description'], top_contributors['contribution'], color='skyblue')
-        axes[i].set_title(group)
-        axes[i].set_xlabel('Contribution to Price Index')
-        axes[i].set_ylabel('Description')
-        axes[i].grid(True)
+    contribution_df = {}
+    for group in comparison_groups.keys():
+        # Calculate the weight differences between the group and the comparison group
+        contribution_df[group] = comparison_groups[group].copy()
+        contribution_df[group]['contribution'] = ((contribution_df[group]['price_index'] - 100) * contribution_df[group]['weight'] / (comparison_groups_yearly_price_index[group] - 100)) * 100
 
-    # Remove any empty subplots
-    for j in range(i + 1, len(axes)):
-        fig.delaxes(axes[j])
+        # Sort by the weight differences in descending order
+        sorted_contribution_df = contribution_df[group].sort_values(by='contribution', ascending=True)
+
+        # Select the top n positive gaps
+        top_n_positive = sorted_contribution_df.head(top_n)
+        top_n_positive = top_n_positive.iloc[::-1]
+
+        # Sort by the weight differences in ascending order
+        sorted_contribution_df = contribution_df[group].sort_values(by='contribution', ascending=False)
+
+        # Select the top n negative gaps
+        top_n_negative = sorted_contribution_df.head(top_n)
+
+        # Concatenate the positive and negative gaps
+        top_n_contribution_df = pd.concat([top_n_positive, top_n_negative])
+
+        # Plot the top n largest gaps
+        axes[list(comparison_groups.keys()).index(group)].barh(top_n_contribution_df['description'], top_n_contribution_df['contribution'], color='skyblue')
+        axes[list(comparison_groups.keys()).index(group)].set_title(group)
+        axes[list(comparison_groups.keys()).index(group)].set_xlabel('Top Contributors')
+        axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
+        axes[list(comparison_groups.keys()).index(group)].grid(True)
 
     plt.tight_layout()
     plt.show()
