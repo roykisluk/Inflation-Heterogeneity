@@ -538,6 +538,9 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
         axes[list(comparison_groups.keys()).index(group)].set_xlabel('Weight Difference')
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
+        # Ensure all subplots share the same x-axis
+        for ax in axes:
+            ax.set_xlim(-0.1, 0.1)
 
     plt.tight_layout()
     plt.show()
@@ -577,9 +580,11 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         # Plot the top n largest gaps
         axes[list(comparison_groups.keys()).index(group)].barh(top_n_contribution_df['description'], top_n_contribution_df['contribution'], color='skyblue')
         axes[list(comparison_groups.keys()).index(group)].set_title(group)
-        axes[list(comparison_groups.keys()).index(group)].set_xlabel('Top Contributors')
+        axes[list(comparison_groups.keys()).index(group)].set_xlabel('Contribution to Price Index (%)')
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
+        for ax in axes:
+            ax.set_xlim(-70, 70)
 
     plt.tight_layout()
     plt.show()
