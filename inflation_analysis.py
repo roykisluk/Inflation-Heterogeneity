@@ -707,7 +707,9 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
         for ax in axes:
-            ax.set_xlim(-70, 70)
+            ax.set_xlim(-100, 100)
 
     plt.tight_layout()
     plt.show()
+
+
