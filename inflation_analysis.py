@@ -299,17 +299,26 @@ def tri_grouping_extended(start_year, end_year, cex_data_folder="/Users/roykislu
     # Secular
     secular = {}
     for year in years:
-        secular[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 1]
+        if year >= 2014:
+            secular[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 1]
+        else:
+            secular[year] = None
 
     # Religious
     religious = {}
     for year in years:
-        religious[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 3]
+        if year >= 2014:
+            religious[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 3]   
+        else:
+            religious[year] = None
 
     # Conservative
     conservative = {}
     for year in years:
-        conservative[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 2]
+        if year >= 2014:
+            conservative[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 2]
+        else:
+            conservative[year] = None
 
     # Young
     young = {}
@@ -581,8 +590,9 @@ def output_data(groups, start_year, end_year, base_year=None, top_n=10, data_fol
     return group_analysis, groups_mmb
 
 def output_obs_table(start_year, end_year, groups_mmb):
-    from tabulate import tabulate
     import pandas as pd
+    from IPython.display import display, HTML
+
     total_observations_per_year = get_n_obs(start_year, end_year)
     group_counts = {group: {year: len(groups_mmb[group][year]) for year in groups_mmb[group]} for group in groups_mmb}
     # Create a dataframe with number of observations per year per group
@@ -598,8 +608,9 @@ def output_obs_table(start_year, end_year, groups_mmb):
     for col in observations_df.columns:
         combined_df[col] = observations_df[col].astype(str) + " (" + relative_share_df[col].round(2).astype(str) + "%)"
 
-    # Display the dataframe
-    print(tabulate(combined_df, headers='keys', tablefmt='psql'))
+    # Display the table
+    html_table = combined_df.to_html()
+    display(HTML(html_table))
 
 def price_index_over_time(group_analysis):
     import matplotlib.pyplot as plt
@@ -632,7 +643,9 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
     ncols = 2
     fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10 * ncols, 5 * nrows), sharey=False)
     axes = axes.flatten()
-
+    
+    axis_max = 0
+    axis_min = 0
     weights_diff_df = {}
     for group in comparison_groups.keys():
         # Calculate the weight differences between the group and the comparison group
@@ -654,6 +667,8 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
 
         # Concatenate the positive and negative gaps
         top_n_weights_diff_df = pd.concat([top_n_positive, top_n_negative])
+        axis_max= max(axis_max, top_n_weights_diff_df['weight_diff'].max())
+        axis_min= min(axis_min, top_n_weights_diff_df['weight_diff'].min())
 
         # Plot the top n largest gaps
         axes[list(comparison_groups.keys()).index(group)].barh(top_n_weights_diff_df['description'], top_n_weights_diff_df['weight_diff'], color='skyblue')
@@ -661,9 +676,13 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
         axes[list(comparison_groups.keys()).index(group)].set_xlabel('Weight Difference')
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
-        # Ensure all subplots share the same x-axis
-        for ax in axes:
-            ax.set_xlim(-0.1, 0.1)
+
+    for i, group in enumerate(comparison_groups.keys()):
+        if i < n_groups:
+            for ax in axes:
+                ax.set_xlim(1.05*axis_min, 1.05*axis_max)
+        else:
+            fig.delaxes(axes[i])
 
     plt.tight_layout()
     plt.show()
@@ -671,6 +690,7 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
 def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10):
     import matplotlib.pyplot as plt
     import pandas as pd
+    from IPython.display import display, HTML
 
     n_groups = len(comparison_groups)
     nrows = (n_groups // 2) + (1 if n_groups % 2 != 0 else 0)
@@ -678,6 +698,8 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
     fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(10 * ncols, 5 * nrows), sharey=False)
     axes = axes.flatten()
 
+    axis_max = 0
+    axis_min = 0
     contribution_df = {}
     for group in comparison_groups.keys():
         # Calculate the weight differences between the group and the comparison group
@@ -699,6 +721,11 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
 
         # Concatenate the positive and negative gaps
         top_n_contribution_df = pd.concat([top_n_positive, top_n_negative])
+        axis_max= max(axis_max, top_n_contribution_df['contribution'].max())
+        axis_min= min(axis_min, top_n_contribution_df['contribution'].min())
+
+        # Display the top n largest gaps as a table
+        display(HTML(top_n_contribution_df.to_html()))
 
         # Plot the top n largest gaps
         axes[list(comparison_groups.keys()).index(group)].barh(top_n_contribution_df['description'], top_n_contribution_df['contribution'], color='skyblue')
@@ -706,8 +733,13 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         axes[list(comparison_groups.keys()).index(group)].set_xlabel('Contribution to Price Index (%)')
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
-        for ax in axes:
-            ax.set_xlim(-100, 100)
+
+    for i, group in enumerate(comparison_groups.keys()):
+        if i < n_groups:
+            for ax in axes:
+                ax.set_xlim(1.05*axis_min, 1.05*axis_max)
+        else:
+            fig.delaxes(axes[i])
 
     plt.tight_layout()
     plt.show()
