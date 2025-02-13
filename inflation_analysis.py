@@ -392,14 +392,13 @@ def get_n_obs(start_year, end_year, group_mmb=None,
     
     return n_obs
 
-def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, factor = 1, verbose = False,
+def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, factor = 1, 
                             cex_data_folder = '/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
                             folder_names_pathname = 'Data_clean/CEX_folder_names.csv', 
                             prodcode_dict_pathname = 'Data_clean/prodcode_dictionary_c3-c399.csv'):
     import pandas as pd
     import pyreadstat
     import numpy as np 
-    from tqdm import tqdm
 
     years = range(start_year, end_year + 1)
 
@@ -453,22 +452,15 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
             if price_base == 0 or pd.isna(price_base) or np.isinf(price_base):
                 index_df.loc[j, 'index'] = factor * 100
                 missing_base_prices += 1
-                if verbose==True:
-                    print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_base")
                 continue
             if price_current == 0 or pd.isna(price_current) or np.isinf(price_current):
                 index_df.loc[j, 'index'] = factor * 100
                 missing_current_prices += 1
-                if verbose==True:
-                    print(f"prodcode {index_df.loc[j, 'prodcode']}: invalid price_current")
                 continue
             index_df.loc[j, 'index'] = (price_current / price_base) * 100
         for j in range(len(index_df)):
             weight = index_df.loc[j, 'weight']
             total_index += weight * index_df.loc[j, 'index']
-        if verbose==True:
-            print(f"Missing base prices: {missing_base_prices}")
-            print(f"Missing current prices: {missing_current_prices}")
         return index_df, total_index
 
     def merge_to_secondary(df):
@@ -499,7 +491,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
 
     # Load price data for each year
     dfs_prices = {}
-    for year in tqdm(years, desc="Loading price data"):
+    for year in years:
         subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
         data_prices_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datayoman.sas7bdat"
         df, meta = pyreadstat.read_sas7bdat(data_prices_pathname)
@@ -518,7 +510,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
     # Calculate weights and price indexes
     yearly_price_index = {}
     df_price_index = {}
-    for year in tqdm(years, desc="Calculating price indexes"):
+    for year in years:
         df_base, df_current = keep_shared_prodcodes(dfs_prices[base_year], dfs_prices[year])
         df_price_index[year], yearly_price_index[year] = Laspeyres(df_base, df_current)
 
@@ -562,7 +554,7 @@ def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, f
 
     return combined_df, combined_secondary_df, combined_primary_df, yearly_price_index
 
-def output_data(groups, start_year, end_year, base_year=None, top_n=10, data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/"):
+def output_data(groups, start_year, end_year, base_year=None, data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/"):
     if base_year is None:   
         base_year = start_year
     years = range(start_year, end_year + 1)
@@ -576,16 +568,15 @@ def output_data(groups, start_year, end_year, base_year=None, top_n=10, data_fol
     for key in groups.keys():
         group_number = list(groups.keys()).index(key) + 1
         total_groups = len(groups)
-        print(f"Group {group_number}/{total_groups} ({key}) started.")
+        print(f"Processing group {group_number}/{total_groups} ({key})")
         combined_df, combined_secondary_df, combined_primary_df, yearly_price_index = calculate_price_indexes(
-            start_year, end_year, base_year, group_mmb=groups_mmb[key], cex_data_folder=data_folder, verbose=False
+            start_year, end_year, base_year, group_mmb=groups_mmb[key], cex_data_folder=data_folder
         )
         group_analysis[key] = {
             'combined_secondary_df': combined_secondary_df,
             'combined_primary_df': combined_primary_df,
             'yearly_price_index': yearly_price_index
         }
-        print(f"Group {group_number}/{total_groups} ({key}) successfully computed.")
     
     return group_analysis, groups_mmb
 
@@ -634,9 +625,10 @@ def price_index_over_time(group_analysis):
     plt.grid(True)
     plt.show()
 
-def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
+def top_abs_weight_differences(comparison_groups, control_group, top_n=10, tables = True):
     import matplotlib.pyplot as plt
     import pandas as pd
+    from IPython.display import display, HTML
 
     n_groups = len(comparison_groups)
     nrows = (n_groups // 2) + (1 if n_groups % 2 != 0 else 0)
@@ -670,13 +662,17 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
         axis_max= max(axis_max, top_n_weights_diff_df['weight_diff'].max())
         axis_min= min(axis_min, top_n_weights_diff_df['weight_diff'].min())
 
+        # Display the top n largest gaps as a table
+        if tables:
+            display(HTML(top_n_weights_diff_df.to_html()))
+
         # Plot the top n largest gaps
         axes[list(comparison_groups.keys()).index(group)].barh(top_n_weights_diff_df['description'], top_n_weights_diff_df['weight_diff'], color='skyblue')
         axes[list(comparison_groups.keys()).index(group)].set_title(group)
         axes[list(comparison_groups.keys()).index(group)].set_xlabel('Weight Difference')
         axes[list(comparison_groups.keys()).index(group)].set_ylabel('Description')
         axes[list(comparison_groups.keys()).index(group)].grid(True)
-
+        
     for i, group in enumerate(comparison_groups.keys()):
         if i < n_groups:
             for ax in axes:
@@ -687,7 +683,7 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10):
     plt.tight_layout()
     plt.show()
 
-def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10):
+def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10, tables = True):
     import matplotlib.pyplot as plt
     import pandas as pd
     from IPython.display import display, HTML
@@ -724,8 +720,9 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         axis_max= max(axis_max, top_n_contribution_df['contribution'].max())
         axis_min= min(axis_min, top_n_contribution_df['contribution'].min())
 
-        # Display the top n largest gaps as a table
-        display(HTML(top_n_contribution_df.to_html()))
+        # Display the top n largest contributions as a table
+        if tables:
+            display(HTML(top_n_contribution_df.to_html()))
 
         # Plot the top n largest gaps
         axes[list(comparison_groups.keys()).index(group)].barh(top_n_contribution_df['description'], top_n_contribution_df['contribution'], color='skyblue')
