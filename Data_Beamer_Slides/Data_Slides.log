@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.28)  13 FEB 2025 13:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.28)  14 FEB 2025 17:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -730,13 +730,13 @@ Package rerunfilecheck Info: File `Data_Slides.out' has not changed.
 Here is how much of TeX's memory you used:
  21340 strings out of 474116
  410929 string characters out of 5743681
- 1935187 words of memory out of 5000000
+ 1937187 words of memory out of 5000000
  43248 multiletter control sequences out of 15000+600000
  568613 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,14n,123p,445b,561s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,14n,123p,434b,561s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Data_Slides.pdf (9 pages, 51804 bytes).
+Output written on Data_Slides.pdf (9 pages, 51692 bytes).
 PDF statistics:
  266 PDF objects out of 1000 (max. 8388607)
  240 compressed objects within 3 object streams
