@@ -683,6 +683,35 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10, table
     plt.tight_layout()
     plt.show()
 
+def index_comparison(comparison_groups, control_group):
+    import pandas as pd
+    from IPython.display import display, HTML
+
+    # Concatenate all dataframes, adding the group name as a new column
+    combined_df_comparison_year = pd.concat(
+        [df.assign(group=name) for name, df in comparison_groups.items()],
+        ignore_index=True
+    )
+
+    # Add the control group to the combined dataframe
+    control_group = control_group.assign(group='Control')
+    combined_df_comparison_year = pd.concat([combined_df_comparison_year, control_group], ignore_index=True)
+
+    # Combine price index and weight into a single string with a newline between them
+    combined_df_comparison_year['price_index_weight'] = combined_df_comparison_year.apply(
+        lambda row: f"{row['price_index']:.2f}\n({row['weight']:.4f})", axis=1
+    )
+
+    # Pivot the dataframe to have groups as columns
+    pivot_df = combined_df_comparison_year.pivot_table(index=['prodcode', 'description'], columns='group', values='price_index_weight', aggfunc='first')
+
+    # Reorder columns to place 'Control' right after 'description'
+    columns_order = ['Control'] + [col for col in pivot_df.columns if col != 'Control']
+    pivot_df = pivot_df[columns_order]
+
+    # Display the table
+    display(HTML(pivot_df.to_html().replace("\\n", "<br>")))
+
 def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10, tables = True):
     import matplotlib.pyplot as plt
     import pandas as pd

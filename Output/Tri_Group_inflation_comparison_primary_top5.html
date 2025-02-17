@@ -7312,6 +7312,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7528,7 +7529,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">inflation_analysis</span> <span class="kn">import</span> <span class="n">calculate_price_indexes</span><span class="p">,</span> <span class="n">tri_grouping</span><span class="p">,</span> <span class="n">output_data</span><span class="p">,</span> <span class="n">output_obs_table</span><span class="p">,</span> <span class="n">price_index_over_time</span><span class="p">,</span> <span class="n">top_abs_weight_differences</span><span class="p">,</span> <span class="n">top_price_index_contributors</span><span class="p">,</span> <span class="n">tri_grouping_extended</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">inflation_analysis</span> <span class="kn">import</span> <span class="n">calculate_price_indexes</span><span class="p">,</span> <span class="n">tri_grouping</span><span class="p">,</span> <span class="n">output_data</span><span class="p">,</span> <span class="n">output_obs_table</span><span class="p">,</span> <span class="n">price_index_over_time</span><span class="p">,</span> <span class="n">top_abs_weight_differences</span><span class="p">,</span> <span class="n">top_price_index_contributors</span><span class="p">,</span> <span class="n">tri_grouping_extended</span><span class="p">,</span> <span class="n">index_comparison</span>
 </pre></div>
 </div>
 </div>
@@ -8099,7 +8100,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">price_index_over_time</span><span class="p">(</span><span class="n">demo_analysis</span><span class="p">)</span>
@@ -8125,7 +8126,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">price_index_over_time</span><span class="p">(</span><span class="n">income_analysis</span><span class="p">)</span>
@@ -8151,7 +8152,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">price_index_over_time</span><span class="p">(</span><span class="n">ses_analysis</span><span class="p">)</span>
@@ -8188,7 +8189,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Define control group</span>
@@ -8203,7 +8204,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top weight differences - demograhic groups</span>
@@ -9003,7 +9004,182 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">index_comparison</span><span class="p">(</span><span class="n">demo_comparison_groups</span><span class="p">,</span> <span class="n">weights_comparison_control</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>group</th>
+<th>Control</th>
+<th>Arabs</th>
+<th>Conservative</th>
+<th>Haredi</th>
+<th>Old</th>
+<th>Religious</th>
+<th>Secular</th>
+<th>Young</th>
+</tr>
+<tr>
+<th>prodcode</th>
+<th>description</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>30</th>
+<th>Food Total Excluding Fruits And Vegetables</th>
+<td>129.67<br/>(0.2587)</td>
+<td>152.93<br/>(0.2782)</td>
+<td>139.24<br/>(0.2678)</td>
+<td>131.76<br/>(0.3051)</td>
+<td>130.38<br/>(0.2823)</td>
+<td>128.47<br/>(0.2677)</td>
+<td>125.04<br/>(0.2535)</td>
+<td>129.80<br/>(0.2775)</td>
+</tr>
+<tr>
+<th>31</th>
+<th>Vegetables And Fruits Total</th>
+<td>123.00<br/>(0.0649)</td>
+<td>134.82<br/>(0.0752)</td>
+<td>125.61<br/>(0.0706)</td>
+<td>128.08<br/>(0.0826)</td>
+<td>129.74<br/>(0.0908)</td>
+<td>127.23<br/>(0.0737)</td>
+<td>123.87<br/>(0.0591)</td>
+<td>124.87<br/>(0.0648)</td>
+</tr>
+<tr>
+<th>32</th>
+<th>Housing Total</th>
+<td>113.42<br/>(0.0299)</td>
+<td>166.72<br/>(0.0090)</td>
+<td>112.68<br/>(0.0196)</td>
+<td>97.24<br/>(0.0346)</td>
+<td>172.78<br/>(0.0211)</td>
+<td>154.89<br/>(0.0242)</td>
+<td>115.74<br/>(0.0364)</td>
+<td>133.93<br/>(0.0420)</td>
+</tr>
+<tr>
+<th>33</th>
+<th>Dwelling And Household Maintenance Total</th>
+<td>123.72<br/>(0.1042)</td>
+<td>119.56<br/>(0.1282)</td>
+<td>125.15<br/>(0.0998)</td>
+<td>137.83<br/>(0.1091)</td>
+<td>170.64<br/>(0.1271)</td>
+<td>99.59<br/>(0.1384)</td>
+<td>121.10<br/>(0.0929)</td>
+<td>127.78<br/>(0.0932)</td>
+</tr>
+<tr>
+<th>34</th>
+<th>Furniture And Household Equipment Total</th>
+<td>118.53<br/>(0.0505)</td>
+<td>114.78<br/>(0.0322)</td>
+<td>117.81<br/>(0.0448)</td>
+<td>134.68<br/>(0.0485)</td>
+<td>150.94<br/>(0.0484)</td>
+<td>165.39<br/>(0.0489)</td>
+<td>128.99<br/>(0.0511)</td>
+<td>92.95<br/>(0.0483)</td>
+</tr>
+<tr>
+<th>35</th>
+<th>Clothing And Footwear Total</th>
+<td>104.40<br/>(0.0722)</td>
+<td>102.88<br/>(0.0944)</td>
+<td>109.94<br/>(0.0824)</td>
+<td>114.19<br/>(0.0858)</td>
+<td>99.61<br/>(0.0473)</td>
+<td>114.82<br/>(0.0668)</td>
+<td>99.36<br/>(0.0679)</td>
+<td>90.97<br/>(0.0849)</td>
+</tr>
+<tr>
+<th>36</th>
+<th>Health Total</th>
+<td>127.27<br/>(0.0537)</td>
+<td>108.01<br/>(0.0386)</td>
+<td>145.92<br/>(0.0462)</td>
+<td>105.61<br/>(0.0594)</td>
+<td>139.45<br/>(0.0952)</td>
+<td>99.92<br/>(0.0484)</td>
+<td>139.39<br/>(0.0576)</td>
+<td>117.39<br/>(0.0395)</td>
+</tr>
+<tr>
+<th>37</th>
+<th>Education Culture And Entertainment Total</th>
+<td>109.47<br/>(0.1086)</td>
+<td>120.19<br/>(0.0888)</td>
+<td>149.20<br/>(0.0901)</td>
+<td>119.56<br/>(0.0815)</td>
+<td>129.75<br/>(0.0750)</td>
+<td>120.46<br/>(0.0825)</td>
+<td>104.02<br/>(0.1185)</td>
+<td>119.59<br/>(0.0899)</td>
+</tr>
+<tr>
+<th>38</th>
+<th>Transport And Communication Total</th>
+<td>100.44<br/>(0.1821)</td>
+<td>108.48<br/>(0.1740)</td>
+<td>93.35<br/>(0.1909)</td>
+<td>138.16<br/>(0.1233)</td>
+<td>105.08<br/>(0.1450)</td>
+<td>108.18<br/>(0.1859)</td>
+<td>99.64<br/>(0.1944)</td>
+<td>100.68<br/>(0.1736)</td>
+</tr>
+<tr>
+<th>39</th>
+<th>Miscellaneous Goods And Services Total</th>
+<td>123.84<br/>(0.0751)</td>
+<td>117.60<br/>(0.0814)</td>
+<td>122.79<br/>(0.0879)</td>
+<td>110.23<br/>(0.0701)</td>
+<td>120.69<br/>(0.0678)</td>
+<td>129.54<br/>(0.0635)</td>
+<td>121.90<br/>(0.0685)</td>
+<td>121.45<br/>(0.0862)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top weight differences - income groups</span>
@@ -10133,7 +10309,218 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">index_comparison</span><span class="p">(</span><span class="n">income_comparison_groups</span><span class="p">,</span> <span class="n">weights_comparison_control</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>group</th>
+<th>Control</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+<tr>
+<th>prodcode</th>
+<th>description</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>30</th>
+<th>Food Total Excluding Fruits And Vegetables</th>
+<td>129.67<br/>(0.2587)</td>
+<td>134.95<br/>(0.3142)</td>
+<td>137.86<br/>(0.3078)</td>
+<td>132.81<br/>(0.2946)</td>
+<td>130.29<br/>(0.2869)</td>
+<td>135.74<br/>(0.2894)</td>
+<td>128.17<br/>(0.2875)</td>
+<td>124.85<br/>(0.2911)</td>
+<td>137.47<br/>(0.2772)</td>
+<td>121.42<br/>(0.2655)</td>
+<td>120.86<br/>(0.2448)</td>
+</tr>
+<tr>
+<th>31</th>
+<th>Vegetables And Fruits Total</th>
+<td>123.00<br/>(0.0649)</td>
+<td>132.01<br/>(0.0791)</td>
+<td>132.66<br/>(0.0823)</td>
+<td>123.83<br/>(0.0767)</td>
+<td>131.28<br/>(0.0751)</td>
+<td>136.35<br/>(0.0730)</td>
+<td>127.38<br/>(0.0739)</td>
+<td>124.66<br/>(0.0693)</td>
+<td>119.02<br/>(0.0690)</td>
+<td>120.16<br/>(0.0668)</td>
+<td>130.47<br/>(0.0573)</td>
+</tr>
+<tr>
+<th>32</th>
+<th>Housing Total</th>
+<td>113.42<br/>(0.0299)</td>
+<td>130.61<br/>(0.0578)</td>
+<td>157.32<br/>(0.0403)</td>
+<td>77.45<br/>(0.0481)</td>
+<td>151.75<br/>(0.0433)</td>
+<td>138.35<br/>(0.0259)</td>
+<td>97.50<br/>(0.0301)</td>
+<td>127.02<br/>(0.0320)</td>
+<td>78.65<br/>(0.0262)</td>
+<td>120.57<br/>(0.0221)</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>33</th>
+<th>Dwelling And Household Maintenance Total</th>
+<td>123.72<br/>(0.1042)</td>
+<td>115.46<br/>(0.1125)</td>
+<td>137.06<br/>(0.1162)</td>
+<td>139.19<br/>(0.0898)</td>
+<td>111.48<br/>(0.1295)</td>
+<td>137.99<br/>(0.0998)</td>
+<td>119.38<br/>(0.1073)</td>
+<td>223.83<br/>(0.1040)</td>
+<td>115.97<br/>(0.0851)</td>
+<td>104.36<br/>(0.1137)</td>
+<td>105.92<br/>(0.1051)</td>
+</tr>
+<tr>
+<th>34</th>
+<th>Furniture And Household Equipment Total</th>
+<td>118.53<br/>(0.0505)</td>
+<td>129.09<br/>(0.0232)</td>
+<td>111.59<br/>(0.0324)</td>
+<td>121.45<br/>(0.0384)</td>
+<td>116.10<br/>(0.0398)</td>
+<td>134.32<br/>(0.0361)</td>
+<td>175.03<br/>(0.0429)</td>
+<td>128.09<br/>(0.0414)</td>
+<td>123.48<br/>(0.0571)</td>
+<td>111.82<br/>(0.0479)</td>
+<td>122.84<br/>(0.0514)</td>
+</tr>
+<tr>
+<th>35</th>
+<th>Clothing And Footwear Total</th>
+<td>104.40<br/>(0.0722)</td>
+<td>118.81<br/>(0.0761)</td>
+<td>101.37<br/>(0.0832)</td>
+<td>130.05<br/>(0.0834)</td>
+<td>119.76<br/>(0.0663)</td>
+<td>90.62<br/>(0.0926)</td>
+<td>116.88<br/>(0.0739)</td>
+<td>106.16<br/>(0.0739)</td>
+<td>112.32<br/>(0.0788)</td>
+<td>101.46<br/>(0.0661)</td>
+<td>93.82<br/>(0.0718)</td>
+</tr>
+<tr>
+<th>36</th>
+<th>Health Total</th>
+<td>127.27<br/>(0.0537)</td>
+<td>140.65<br/>(0.0409)</td>
+<td>99.87<br/>(0.0503)</td>
+<td>114.22<br/>(0.0563)</td>
+<td>160.83<br/>(0.0436)</td>
+<td>145.60<br/>(0.0532)</td>
+<td>136.61<br/>(0.0551)</td>
+<td>137.18<br/>(0.0497)</td>
+<td>120.68<br/>(0.0634)</td>
+<td>148.11<br/>(0.0694)</td>
+<td>119.32<br/>(0.0638)</td>
+</tr>
+<tr>
+<th>37</th>
+<th>Education Culture And Entertainment Total</th>
+<td>109.47<br/>(0.1086)</td>
+<td>95.81<br/>(0.0748)</td>
+<td>105.69<br/>(0.0771)</td>
+<td>227.98<br/>(0.0695)</td>
+<td>98.17<br/>(0.0858)</td>
+<td>209.77<br/>(0.0990)</td>
+<td>101.53<br/>(0.0905)</td>
+<td>114.12<br/>(0.0979)</td>
+<td>125.75<br/>(0.1142)</td>
+<td>113.21<br/>(0.1036)</td>
+<td>72.14<br/>(0.1448)</td>
+</tr>
+<tr>
+<th>38</th>
+<th>Transport And Communication Total</th>
+<td>100.44<br/>(0.1821)</td>
+<td>113.12<br/>(0.1326)</td>
+<td>108.32<br/>(0.1268)</td>
+<td>116.89<br/>(0.1620)</td>
+<td>111.05<br/>(0.1520)</td>
+<td>127.88<br/>(0.1540)</td>
+<td>105.12<br/>(0.1633)</td>
+<td>89.75<br/>(0.1673)</td>
+<td>93.36<br/>(0.1543)</td>
+<td>100.00<br/>(0.1711)</td>
+<td>91.01<br/>(0.1879)</td>
+</tr>
+<tr>
+<th>39</th>
+<th>Miscellaneous Goods And Services Total</th>
+<td>123.84<br/>(0.0751)</td>
+<td>121.97<br/>(0.0887)</td>
+<td>126.83<br/>(0.0836)</td>
+<td>118.72<br/>(0.0813)</td>
+<td>133.30<br/>(0.0779)</td>
+<td>130.93<br/>(0.0770)</td>
+<td>127.74<br/>(0.0754)</td>
+<td>130.85<br/>(0.0734)</td>
+<td>121.78<br/>(0.0747)</td>
+<td>112.82<br/>(0.0738)</td>
+<td>103.25<br/>(0.0731)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top weight differences - SES groups</span>
@@ -10715,6 +11102,167 @@ Processing group 5/5 (5)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">index_comparison</span><span class="p">(</span><span class="n">ses_comparison_groups</span><span class="p">,</span> <span class="n">weights_comparison_control</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>group</th>
+<th>Control</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+<tr>
+<th>prodcode</th>
+<th>description</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>30</th>
+<th>Food Total Excluding Fruits And Vegetables</th>
+<td>129.67<br/>(0.2587)</td>
+<td>147.50<br/>(0.2795)</td>
+<td>135.97<br/>(0.2688)</td>
+<td>132.64<br/>(0.2816)</td>
+<td>119.76<br/>(0.2612)</td>
+<td>112.86<br/>(0.1977)</td>
+</tr>
+<tr>
+<th>31</th>
+<th>Vegetables And Fruits Total</th>
+<td>123.00<br/>(0.0649)</td>
+<td>125.83<br/>(0.0739)</td>
+<td>122.07<br/>(0.0728)</td>
+<td>126.70<br/>(0.0704)</td>
+<td>116.48<br/>(0.0614)</td>
+<td>171.36<br/>(0.0471)</td>
+</tr>
+<tr>
+<th>32</th>
+<th>Housing Total</th>
+<td>113.42<br/>(0.0299)</td>
+<td>123.87<br/>(0.0065)</td>
+<td>97.77<br/>(0.0246)</td>
+<td>119.02<br/>(0.0317)</td>
+<td>119.29<br/>(0.0427)</td>
+<td>2.25<br/>(0.0085)</td>
+</tr>
+<tr>
+<th>33</th>
+<th>Dwelling And Household Maintenance Total</th>
+<td>123.72<br/>(0.1042)</td>
+<td>106.28<br/>(0.1213)</td>
+<td>124.20<br/>(0.1121)</td>
+<td>118.88<br/>(0.1046)</td>
+<td>111.68<br/>(0.0957)</td>
+<td>59.86<br/>(0.1651)</td>
+</tr>
+<tr>
+<th>34</th>
+<th>Furniture And Household Equipment Total</th>
+<td>118.53<br/>(0.0505)</td>
+<td>118.35<br/>(0.0387)</td>
+<td>125.80<br/>(0.0363)</td>
+<td>182.31<br/>(0.0569)</td>
+<td>125.66<br/>(0.0490)</td>
+<td>60.30<br/>(0.0335)</td>
+</tr>
+<tr>
+<th>35</th>
+<th>Clothing And Footwear Total</th>
+<td>104.40<br/>(0.0722)</td>
+<td>97.96<br/>(0.0980)</td>
+<td>102.90<br/>(0.0758)</td>
+<td>111.08<br/>(0.0731)</td>
+<td>96.78<br/>(0.0720)</td>
+<td>nan<br/>(0.0319)</td>
+</tr>
+<tr>
+<th>36</th>
+<th>Health Total</th>
+<td>127.27<br/>(0.0537)</td>
+<td>109.42<br/>(0.0410)</td>
+<td>123.97<br/>(0.0515)</td>
+<td>146.20<br/>(0.0523)</td>
+<td>126.79<br/>(0.0619)</td>
+<td>50.84<br/>(0.0763)</td>
+</tr>
+<tr>
+<th>37</th>
+<th>Education Culture And Entertainment Total</th>
+<td>109.47<br/>(0.1086)</td>
+<td>117.92<br/>(0.0812)</td>
+<td>113.31<br/>(0.0874)</td>
+<td>134.59<br/>(0.0942)</td>
+<td>99.43<br/>(0.1271)</td>
+<td>76.62<br/>(0.0511)</td>
+</tr>
+<tr>
+<th>38</th>
+<th>Transport And Communication Total</th>
+<td>100.44<br/>(0.1821)</td>
+<td>110.74<br/>(0.1851)</td>
+<td>95.76<br/>(0.1925)</td>
+<td>101.33<br/>(0.1502)</td>
+<td>108.55<br/>(0.1609)</td>
+<td>43.99<br/>(0.3506)</td>
+</tr>
+<tr>
+<th>39</th>
+<th>Miscellaneous Goods And Services Total</th>
+<td>123.84<br/>(0.0751)</td>
+<td>117.92<br/>(0.0748)</td>
+<td>132.62<br/>(0.0781)</td>
+<td>120.35<br/>(0.0850)</td>
+<td>118.65<br/>(0.0682)</td>
+<td>82.93<br/>(0.0383)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Top-Contributors-to-CPI-Change">Top Contributors to CPI Change<a class="anchor-link" href="#Top-Contributors-to-CPI-Change">¶</a></h3>
 </div>
 </div>
@@ -10724,7 +11272,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top contributors - demographic groups</span>
@@ -11524,7 +12072,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top contributors - income groups</span>
@@ -12654,7 +13202,7 @@ Processing group 5/5 (5)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Top contributors - SES groups</span>
@@ -13229,17 +13777,54 @@ Processing group 5/5 (5)
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Export to html [--no-input]</span>
-<span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Tri_Group_inflation_comparison.ipynb
+<span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>Tri_Group_inflation_comparison.ipynb<span class="w"> </span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Traceback (most recent call last):
+  File "/opt/anaconda3/bin/jupyter-nbconvert", line 5, in &lt;module&gt;
+    from nbconvert.nbconvertapp import main
+  File "/opt/anaconda3/lib/python3.12/site-packages/nbconvert/nbconvertapp.py", line 193, in &lt;module&gt;
+    class NbConvertApp(JupyterApp):
+  File "/opt/anaconda3/lib/python3.12/site-packages/nbconvert/nbconvertapp.py", line 252, in NbConvertApp
+    Options include {get_export_names()}.
+                     ^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/nbconvert/exporters/base.py", line 145, in get_export_names
+    e = get_exporter(exporter_name)(config=config)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/nbconvert/exporters/base.py", line 106, in get_exporter
+    exporter = items[0].load()
+               ^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/importlib/metadata/__init__.py", line 205, in load
+    module = import_module(match.group('module'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/jupyter_contrib_nbextensions/nbconvert_support/__init__.py", line 5, in &lt;module&gt;
+    from .collapsible_headings import ExporterCollapsibleHeadings
+  File "/opt/anaconda3/lib/python3.12/site-packages/jupyter_contrib_nbextensions/nbconvert_support/collapsible_headings.py", line 6, in &lt;module&gt;
+    from notebook.services.config import ConfigManager
+ModuleNotFoundError: No module named 'notebook.services'
+</pre>
 </div>
 </div>
 </div>
