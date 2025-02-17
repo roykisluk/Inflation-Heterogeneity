@@ -7779,12 +7779,23 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Display the top N increases and decreases as tables</span>
 <span class="n">top_increases</span><span class="p">[</span><span class="sa">f</span><span class="s1">'Change_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_increases</span><span class="p">[</span><span class="sa">f</span><span class="s1">'Change_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">top_decreases</span><span class="p">[</span><span class="sa">f</span><span class="s1">'Change_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_decreases</span><span class="p">[</span><span class="sa">f</span><span class="s1">'Change_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Reorder columns to place Change column right after Description</span>
+<span class="n">change_col</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'Change_</span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">top_increases</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">change_col</span><span class="p">)</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">cols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'Description'</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">change_col</span><span class="p">)</span>
+<span class="n">top_increases</span> <span class="o">=</span> <span class="n">top_increases</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
+
+<span class="n">cols</span> <span class="o">=</span> <span class="n">top_decreases</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">change_col</span><span class="p">)</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">cols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'Description'</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">change_col</span><span class="p">)</span>
+<span class="n">top_decreases</span> <span class="o">=</span> <span class="n">top_decreases</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Top </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s1"> Price Increases from </span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">top_increases</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Top </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s1"> Price Decreases from </span><span class="si">{</span><span class="n">start_year</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">end_year</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
@@ -7813,6 +7824,7 @@ a.anchor-link {
 <tr style="text-align: right;">
 <th>Item</th>
 <th>Description</th>
+<th>Change_1997_2022</th>
 <th>1997</th>
 <th>1998</th>
 <th>1999</th>
@@ -7839,13 +7851,13 @@ a.anchor-link {
 <th>2020</th>
 <th>2021</th>
 <th>2022</th>
-<th>Change_1997_2022</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>120610</td>
 <td>Kerosene and Diesel for Home Heating</td>
+<td>90.09</td>
 <td>9.900000</td>
 <td>10.366667</td>
 <td>13.266667</td>
@@ -7872,11 +7884,11 @@ a.anchor-link {
 <td>65.291667</td>
 <td>60.233333</td>
 <td>99.991667</td>
-<td>90.09</td>
 </tr>
 <tr>
 <td>121440</td>
 <td>Cigarettes and Tobacco</td>
+<td>74.15</td>
 <td>25.841667</td>
 <td>27.841667</td>
 <td>30.300000</td>
@@ -7903,11 +7915,11 @@ a.anchor-link {
 <td>98.033333</td>
 <td>98.033333</td>
 <td>99.991667</td>
-<td>74.15</td>
 </tr>
 <tr>
 <td>120600</td>
 <td>Gas for Household Use</td>
+<td>68.21</td>
 <td>31.816667</td>
 <td>33.808333</td>
 <td>37.175000</td>
@@ -7934,11 +7946,11 @@ a.anchor-link {
 <td>100.041667</td>
 <td>97.925000</td>
 <td>100.025000</td>
-<td>68.21</td>
 </tr>
 <tr>
 <td>121420</td>
 <td>Postal Services</td>
+<td>65.94</td>
 <td>34.058333</td>
 <td>36.500000</td>
 <td>37.358333</td>
@@ -7965,11 +7977,11 @@ a.anchor-link {
 <td>96.633333</td>
 <td>97.291667</td>
 <td>100.000000</td>
-<td>65.94</td>
 </tr>
 <tr>
 <td>120220</td>
 <td>Margarine</td>
+<td>64.93</td>
 <td>35.050000</td>
 <td>39.500000</td>
 <td>41.250000</td>
@@ -7996,11 +8008,11 @@ a.anchor-link {
 <td>99.441667</td>
 <td>99.150000</td>
 <td>99.983333</td>
-<td>64.93</td>
 </tr>
 <tr>
 <td>120070</td>
 <td>Bread</td>
+<td>62.38</td>
 <td>37.608333</td>
 <td>39.400000</td>
 <td>43.533333</td>
@@ -8027,11 +8039,11 @@ a.anchor-link {
 <td>93.508333</td>
 <td>94.825000</td>
 <td>99.991667</td>
-<td>62.38</td>
 </tr>
 <tr>
 <td>120090</td>
 <td>Flour</td>
+<td>61.81</td>
 <td>38.233333</td>
 <td>38.116667</td>
 <td>39.966667</td>
@@ -8058,11 +8070,11 @@ a.anchor-link {
 <td>90.733333</td>
 <td>92.675000</td>
 <td>100.041667</td>
-<td>61.81</td>
 </tr>
 <tr>
 <td>120420</td>
 <td>Meals at Work</td>
+<td>60.59</td>
 <td>39.358333</td>
 <td>41.608333</td>
 <td>43.408333</td>
@@ -8089,11 +8101,11 @@ a.anchor-link {
 <td>94.633333</td>
 <td>97.833333</td>
 <td>99.950000</td>
-<td>60.59</td>
 </tr>
 <tr>
 <td>120140</td>
 <td>Beef</td>
+<td>60.02</td>
 <td>39.958333</td>
 <td>45.866667</td>
 <td>48.675000</td>
@@ -8120,11 +8132,11 @@ a.anchor-link {
 <td>94.258333</td>
 <td>96.366667</td>
 <td>99.983333</td>
-<td>60.02</td>
 </tr>
 <tr>
 <td>121190</td>
 <td>Hospitality Recreation and Travel</td>
+<td>60.02</td>
 <td>39.991667</td>
 <td>44.216667</td>
 <td>49.033333</td>
@@ -8151,11 +8163,11 @@ a.anchor-link {
 <td>79.666667</td>
 <td>93.608333</td>
 <td>100.008333</td>
-<td>60.02</td>
 </tr>
 <tr>
 <td>120560</td>
 <td>Painting Plastering etc.</td>
+<td>59.64</td>
 <td>40.325000</td>
 <td>41.241667</td>
 <td>43.608333</td>
@@ -8182,11 +8194,11 @@ a.anchor-link {
 <td>81.766667</td>
 <td>85.616667</td>
 <td>99.966667</td>
-<td>59.64</td>
 </tr>
 <tr>
 <td>120150</td>
 <td>Other Meat Lamb and Pork</td>
+<td>58.43</td>
 <td>41.575000</td>
 <td>45.233333</td>
 <td>49.200000</td>
@@ -8213,11 +8225,11 @@ a.anchor-link {
 <td>89.491667</td>
 <td>93.566667</td>
 <td>100.008333</td>
-<td>58.43</td>
 </tr>
 <tr>
 <td>121250</td>
 <td>Health Insurance Services HMOs and Private Insurers</td>
+<td>56.21</td>
 <td>43.808333</td>
 <td>47.700000</td>
 <td>53.075000</td>
@@ -8244,11 +8256,11 @@ a.anchor-link {
 <td>94.841667</td>
 <td>95.308333</td>
 <td>100.016667</td>
-<td>56.21</td>
 </tr>
 <tr>
 <td>120410</td>
 <td>Meals Outside the Home</td>
+<td>55.35</td>
 <td>44.658333</td>
 <td>48.275000</td>
 <td>52.550000</td>
@@ -8275,11 +8287,11 @@ a.anchor-link {
 <td>92.125000</td>
 <td>94.391667</td>
 <td>100.008333</td>
-<td>55.35</td>
 </tr>
 <tr>
 <td>120430</td>
 <td>Meals at Restaurants and Cafés</td>
+<td>54.97</td>
 <td>44.991667</td>
 <td>48.416667</td>
 <td>52.675000</td>
@@ -8306,11 +8318,11 @@ a.anchor-link {
 <td>91.983333</td>
 <td>94.375000</td>
 <td>99.958333</td>
-<td>54.97</td>
 </tr>
 <tr>
 <td>121370</td>
 <td>Driving Lessons Vehicle Rental etc.</td>
+<td>54.92</td>
 <td>45.083333</td>
 <td>46.900000</td>
 <td>48.375000</td>
@@ -8337,11 +8349,11 @@ a.anchor-link {
 <td>79.825000</td>
 <td>87.575000</td>
 <td>100.000000</td>
-<td>54.92</td>
 </tr>
 <tr>
 <td>120200</td>
 <td>Oils and Margarine</td>
+<td>54.36</td>
 <td>45.633333</td>
 <td>52.241667</td>
 <td>56.933333</td>
@@ -8368,11 +8380,11 @@ a.anchor-link {
 <td>85.858333</td>
 <td>90.758333</td>
 <td>99.991667</td>
-<td>54.36</td>
 </tr>
 <tr>
 <td>121240</td>
 <td>Medical Services</td>
+<td>54.15</td>
 <td>45.841667</td>
 <td>49.975000</td>
 <td>54.616667</td>
@@ -8399,11 +8411,11 @@ a.anchor-link {
 <td>94.958333</td>
 <td>95.600000</td>
 <td>99.991667</td>
-<td>54.15</td>
 </tr>
 <tr>
 <td>120440</td>
 <td>Groceries from Kiosks and Convenience Stores</td>
+<td>53.42</td>
 <td>46.591667</td>
 <td>50.883333</td>
 <td>55.608333</td>
@@ -8430,11 +8442,11 @@ a.anchor-link {
 <td>91.691667</td>
 <td>92.608333</td>
 <td>100.016667</td>
-<td>53.42</td>
 </tr>
 <tr>
 <td>120620</td>
 <td>Water and Sewage Services for Household Use</td>
+<td>53.36</td>
 <td>46.591667</td>
 <td>50.383333</td>
 <td>52.966667</td>
@@ -8461,7 +8473,6 @@ a.anchor-link {
 <td>96.800000</td>
 <td>99.833333</td>
 <td>99.950000</td>
-<td>53.36</td>
 </tr>
 </tbody>
 </table>
@@ -8482,6 +8493,7 @@ a.anchor-link {
 <tr style="text-align: right;">
 <th>Item</th>
 <th>Description</th>
+<th>Change_1997_2022</th>
 <th>1997</th>
 <th>1998</th>
 <th>1999</th>
@@ -8508,13 +8520,13 @@ a.anchor-link {
 <th>2020</th>
 <th>2021</th>
 <th>2022</th>
-<th>Change_1997_2022</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>120730</td>
 <td>Bedding and Towels</td>
+<td>-513.53</td>
 <td>613.566667</td>
 <td>625.300000</td>
 <td>623.900000</td>
@@ -8541,11 +8553,11 @@ a.anchor-link {
 <td>109.666667</td>
 <td>107.125000</td>
 <td>100.033333</td>
-<td>-513.53</td>
 </tr>
 <tr>
 <td>121210</td>
 <td>Hobbies</td>
+<td>-240.55</td>
 <td>340.541667</td>
 <td>335.291667</td>
 <td>313.675000</td>
@@ -8572,11 +8584,11 @@ a.anchor-link {
 <td>97.291667</td>
 <td>97.908333</td>
 <td>99.991667</td>
-<td>-240.55</td>
 </tr>
 <tr>
 <td>121020</td>
 <td>Women's Footwear</td>
+<td>-214.24</td>
 <td>314.225000</td>
 <td>294.291667</td>
 <td>281.175000</td>
@@ -8603,11 +8615,11 @@ a.anchor-link {
 <td>107.183333</td>
 <td>102.608333</td>
 <td>99.983333</td>
-<td>-214.24</td>
 </tr>
 <tr>
 <td>120880</td>
 <td>Women's Outerwear</td>
+<td>-163.53</td>
 <td>263.583333</td>
 <td>248.033333</td>
 <td>255.650000</td>
@@ -8634,11 +8646,11 @@ a.anchor-link {
 <td>124.725000</td>
 <td>111.158333</td>
 <td>100.050000</td>
-<td>-163.53</td>
 </tr>
 <tr>
 <td>121000</td>
 <td>Footwear</td>
+<td>-152.34</td>
 <td>252.308333</td>
 <td>239.300000</td>
 <td>230.500000</td>
@@ -8665,11 +8677,11 @@ a.anchor-link {
 <td>106.258333</td>
 <td>104.400000</td>
 <td>99.966667</td>
-<td>-152.34</td>
 </tr>
 <tr>
 <td>121030</td>
 <td>Children's Footwear</td>
+<td>-140.91</td>
 <td>240.883333</td>
 <td>226.191667</td>
 <td>214.791667</td>
@@ -8696,11 +8708,11 @@ a.anchor-link {
 <td>109.141667</td>
 <td>104.750000</td>
 <td>99.975000</td>
-<td>-140.91</td>
 </tr>
 <tr>
 <td>121010</td>
 <td>Men's Footwear</td>
+<td>-121.09</td>
 <td>221.083333</td>
 <td>213.766667</td>
 <td>207.300000</td>
@@ -8727,11 +8739,11 @@ a.anchor-link {
 <td>103.891667</td>
 <td>106.516667</td>
 <td>99.991667</td>
-<td>-121.09</td>
 </tr>
 <tr>
 <td>120890</td>
 <td>Children's and Infants' Outerwear</td>
+<td>-103.28</td>
 <td>203.266667</td>
 <td>208.983333</td>
 <td>215.275000</td>
@@ -8758,11 +8770,11 @@ a.anchor-link {
 <td>116.616667</td>
 <td>108.175000</td>
 <td>99.991667</td>
-<td>-103.28</td>
 </tr>
 <tr>
 <td>121220</td>
 <td>Toys for Children and Youth</td>
+<td>-93.69</td>
 <td>193.716667</td>
 <td>203.941667</td>
 <td>229.891667</td>
@@ -8789,11 +8801,11 @@ a.anchor-link {
 <td>98.200000</td>
 <td>99.083333</td>
 <td>100.025000</td>
-<td>-93.69</td>
 </tr>
 <tr>
 <td>120850</td>
 <td>Clothing and Footwear</td>
+<td>-84.94</td>
 <td>184.916667</td>
 <td>182.558333</td>
 <td>182.883333</td>
@@ -8820,11 +8832,11 @@ a.anchor-link {
 <td>110.441667</td>
 <td>105.091667</td>
 <td>99.975000</td>
-<td>-84.94</td>
 </tr>
 <tr>
 <td>120860</td>
 <td>Clothing</td>
+<td>-70.66</td>
 <td>170.608333</td>
 <td>170.341667</td>
 <td>171.858333</td>
@@ -8851,11 +8863,11 @@ a.anchor-link {
 <td>111.733333</td>
 <td>105.233333</td>
 <td>99.950000</td>
-<td>-70.66</td>
 </tr>
 <tr>
 <td>121410</td>
 <td>Telephone Internet TV and Communication Products</td>
+<td>-65.82</td>
 <td>165.775000</td>
 <td>164.733333</td>
 <td>157.391667</td>
@@ -8882,11 +8894,11 @@ a.anchor-link {
 <td>108.258333</td>
 <td>103.358333</td>
 <td>99.950000</td>
-<td>-65.82</td>
 </tr>
 <tr>
 <td>121400</td>
 <td>Communication</td>
+<td>-64.92</td>
 <td>164.916667</td>
 <td>164.241667</td>
 <td>157.208333</td>
@@ -8913,11 +8925,11 @@ a.anchor-link {
 <td>108.208333</td>
 <td>103.408333</td>
 <td>100.000000</td>
-<td>-64.92</td>
 </tr>
 <tr>
 <td>120840</td>
 <td>Other Kitchen and Home Electrical Equipment e.g. Microwave Vacuum Cleaner</td>
+<td>-63.01</td>
 <td>162.975000</td>
 <td>169.275000</td>
 <td>181.325000</td>
@@ -8944,11 +8956,11 @@ a.anchor-link {
 <td>97.816667</td>
 <td>99.916667</td>
 <td>99.966667</td>
-<td>-63.01</td>
 </tr>
 <tr>
 <td>121200</td>
 <td>Entertainment Electronics</td>
+<td>-61.98</td>
 <td>161.925000</td>
 <td>164.008333</td>
 <td>174.841667</td>
@@ -8975,11 +8987,11 @@ a.anchor-link {
 <td>100.008333</td>
 <td>100.141667</td>
 <td>99.950000</td>
-<td>-61.98</td>
 </tr>
 <tr>
 <td>120720</td>
 <td>Bedding and Decorative Items for the Home</td>
+<td>-56.53</td>
 <td>156.508333</td>
 <td>166.108333</td>
 <td>172.575000</td>
@@ -9006,11 +9018,11 @@ a.anchor-link {
 <td>100.608333</td>
 <td>100.316667</td>
 <td>99.975000</td>
-<td>-56.53</td>
 </tr>
 <tr>
 <td>120870</td>
 <td>Men's Outerwear</td>
+<td>-52.00</td>
 <td>151.983333</td>
 <td>154.500000</td>
 <td>150.033333</td>
@@ -9037,11 +9049,11 @@ a.anchor-link {
 <td>104.141667</td>
 <td>101.741667</td>
 <td>99.983333</td>
-<td>-52.00</td>
 </tr>
 <tr>
 <td>121300</td>
 <td>Glasses and Optical Products</td>
+<td>-44.79</td>
 <td>144.825000</td>
 <td>151.558333</td>
 <td>163.225000</td>
@@ -9068,11 +9080,11 @@ a.anchor-link {
 <td>102.825000</td>
 <td>103.975000</td>
 <td>100.033333</td>
-<td>-44.79</td>
 </tr>
 <tr>
 <td>120810</td>
 <td>Electrical Equipment for the Home</td>
+<td>-39.83</td>
 <td>139.850000</td>
 <td>145.825000</td>
 <td>156.883333</td>
@@ -9099,11 +9111,11 @@ a.anchor-link {
 <td>94.483333</td>
 <td>97.283333</td>
 <td>100.016667</td>
-<td>-39.83</td>
 </tr>
 <tr>
 <td>121520</td>
 <td>Bags Suitcases Backpacks and Wallets</td>
+<td>-33.69</td>
 <td>133.666667</td>
 <td>143.041667</td>
 <td>155.891667</td>
@@ -9130,7 +9142,6 @@ a.anchor-link {
 <td>100.225000</td>
 <td>99.758333</td>
 <td>99.975000</td>
-<td>-33.69</td>
 </tr>
 </tbody>
 </table>
@@ -9154,7 +9165,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create a plot for the top N increases</span>
@@ -9193,7 +9204,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create a plot for the top N decreases</span>
