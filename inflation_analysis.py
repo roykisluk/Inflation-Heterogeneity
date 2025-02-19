@@ -460,7 +460,7 @@ def price_index_over_time(group_analysis, control_price_index = None):
     plt.grid(True)
     plt.show()
 
-def top_abs_weight_differences(comparison_groups, control_group, top_n=10, tables = True):
+def top_abs_weight_differences(comparison_groups, control_group, top_n=10, tables = False, title = ""):
     import matplotlib.pyplot as plt
     import pandas as pd
     from IPython.display import display, HTML
@@ -515,6 +515,7 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10, table
         else:
             fig.delaxes(axes[i])
 
+    fig.suptitle(f"{title} : Top Weight Differences", fontsize=16)
     plt.tight_layout()
     plt.show()
 
@@ -547,7 +548,7 @@ def index_comparison(comparison_groups, control_group):
     # Display the table
     display(HTML(pivot_df.to_html().replace("\\n", "<br>")))
 
-def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10, tables = True):
+def top_price_index_contributors(comparison_groups, comparison_groups_yearly_price_index, top_n=10, tables = False, title = ""):
     import matplotlib.pyplot as plt
     import pandas as pd
     from IPython.display import display, HTML
@@ -602,6 +603,7 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         else:
             fig.delaxes(axes[i])
 
+    fig.suptitle(f"{title} : Top Index Contributors", fontsize=16)
     plt.tight_layout()
     plt.show()
 
