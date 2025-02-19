@@ -430,7 +430,7 @@ def output_obs_table(start_year, end_year, groups_mmb):
     html_table = combined_df.to_html()
     display(HTML(html_table))
 
-def price_index_over_time(group_analysis, control_price_index = None):
+def price_index_over_time(group_analysis, control_price_index = None, title = ""):
     import matplotlib.pyplot as plt
 
     # Extract yearly price indexes for each group
@@ -455,7 +455,7 @@ def price_index_over_time(group_analysis, control_price_index = None):
 
     plt.xlabel('Year')
     plt.ylabel('Price Index')
-    plt.title('Yearly Price Index Comparison Between Groups')
+    plt.title(f"{title} : Price Index Over Time")
     plt.legend()
     plt.grid(True)
     plt.show()
@@ -515,7 +515,7 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10, table
         else:
             fig.delaxes(axes[i])
 
-    fig.suptitle(f"{title} : Top Weight Differences", fontsize=16)
+    fig.suptitle(f"{title} : Top Weight Differences")
     plt.tight_layout()
     plt.show()
 
@@ -603,7 +603,7 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         else:
             fig.delaxes(axes[i])
 
-    fig.suptitle(f"{title} : Top Index Contributors", fontsize=16)
+    fig.suptitle(f"{title} : Top Index Contributors")
     plt.tight_layout()
     plt.show()
 
