@@ -407,7 +407,7 @@ def output_data(groups, start_year, end_year, base_year=None, data_folder="/User
     
     return group_analysis, groups_mmb
 
-def output_obs_table(start_year, end_year, groups_mmb):
+def output_obs_table(start_year, end_year, groups_mmb, title = ""):
     import pandas as pd
     from IPython.display import display, HTML
 
@@ -428,6 +428,7 @@ def output_obs_table(start_year, end_year, groups_mmb):
 
     # Display the table
     html_table = combined_df.to_html()
+    display(HTML(f"<h2>{title} : Observations Per Year</h2>"))
     display(HTML(html_table))
 
 def price_index_over_time(group_analysis, control_price_index = None, title = ""):
@@ -515,7 +516,7 @@ def top_abs_weight_differences(comparison_groups, control_group, top_n=10, table
         else:
             fig.delaxes(axes[i])
 
-    fig.suptitle(f"{title} : Top Weight Differences")
+    fig.suptitle(f"{title} : Top Weight Differences", fontsize=32)
     plt.tight_layout()
     plt.show()
 
@@ -603,7 +604,7 @@ def top_price_index_contributors(comparison_groups, comparison_groups_yearly_pri
         else:
             fig.delaxes(axes[i])
 
-    fig.suptitle(f"{title} : Top Index Contributors")
+    fig.suptitle(f"{title} : Top Index Contributors", fontsize=32)
     plt.tight_layout()
     plt.show()
 
