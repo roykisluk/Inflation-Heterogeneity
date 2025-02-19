@@ -1,5 +1,7 @@
-def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/", 
-            young_age_cutoff=25, old_age_threshold=65, income_groups = 'quintiles', ses_groups = 'tertiles',
+def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/",
+            low_income_decile=1, high_income_decile=9, 
+            low_ses_cutoff=1, high_ses_cutoff=5, 
+            young_age_cutoff=25, old_age_threshold=65, 
             folder_names_pathname='Data_clean/CEX_folder_names.csv', 
             age_groups_pathname='Data_clean/age_groups.csv'):
     
@@ -45,24 +47,241 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
 
     # Groups
 
-    # Nationality (Arab, Jewish)
-    
-    # Jewish
-    jewish = {}
-    for year in years:
-        jewish[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 1]
-
     # Arabs
-    arab = {}
+    arabs = {}
     for year in years:
-        arab[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 2]
+        arabs[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 2]
 
-    # # Other
-    # other = {}
-    # for year in years:
-    #     other[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 3]
+    # Haredi
+    haredi = {}
+    for year in years:
+        if year >= 2014:  # From 2014 the variable 'RamatDatiyut' is available
+            haredi[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 4]
+        else:  # If the indicator is not available, we will use the lack of television and studies in yeshiva as a proxy
+            haredi[year] = dfs_HH[year][dfs_HH[year]['television'] == 0]
+            haredi[year] = haredi[year].merge(
+                dfs_IND[year][dfs_IND[year]['l_school'] == 10], 
+                on='misparmb', 
+                how='inner'
+            )
 
-    # Observance (Secular, Conservative, Religious, Haredi)
+    # Low income
+    low_income = {}
+    for year in years:
+        low_income[year] = dfs_HH[year][dfs_HH[year]['decile'] <= low_income_decile]
+
+    # High income
+    high_income = {}
+    for year in years:
+        high_income[year] = dfs_HH[year][dfs_HH[year]['decile'] >= high_income_decile]
+
+    # Young
+    young = {}
+    for year in years:
+        young[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] <= young_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
+
+    # Old
+    old = {}
+    for year in years:
+        old[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] >= old_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
+
+    # Low SES (socioeconomic status) of locality
+    low_SES_locality = {}
+    for year in years:
+        low_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] <= low_ses_cutoff]
+
+    # High SES (socioeconomic status) of locality
+    high_SES_locality = {}
+    for year in years:
+        high_SES_locality[year] = dfs_HH[year][dfs_HH[year]['cluster'] >= high_ses_cutoff]
+
+    # Muslim
+    muslim = {}
+    for year in years:
+        muslim[year] = dfs_HH[year][dfs_HH[year]['religion'] == 3]
+
+    # Christian
+    christian = {}
+    for year in years:
+        christian[year] = dfs_HH[year][dfs_HH[year]['religion'] == 2]
+
+    # Druze
+    druze = {}
+    for year in years:
+        druze[year] = dfs_HH[year][dfs_HH[year]['religion'] == 4]
+
+    return {
+        'Arabs': arabs,
+        'Haredi': haredi,
+        'Low_inc': low_income,
+        'High_inc': high_income,
+        'Young': young,
+        'Old': old,
+        'Low_SES': low_SES_locality,
+        'High_SES': high_SES_locality,
+        'Muslim': muslim,
+        'Christian': christian,
+        'Druze': druze
+    }, total_misparmb
+
+def tri_grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/", 
+            young_age_cutoff=25, old_age_threshold=65, 
+            folder_names_pathname='Data_clean/CEX_folder_names.csv', 
+            age_groups_pathname='Data_clean/age_groups.csv'):
+    
+    import pandas as pd
+    import pyreadstat  
+
+    years = range(start_year, end_year + 1)
+
+    # Load folder names
+    folder_names_df = pd.read_csv(folder_names_pathname)
+
+    # Load age groups
+    age_groups_df = pd.read_csv(age_groups_pathname)
+    young_age_group_id = age_groups_df[(age_groups_df['min_age'] <= young_age_cutoff) & (age_groups_df['max_age'] >= young_age_cutoff)].index[0] + 1
+    old_age_group_id = age_groups_df[(age_groups_df['min_age'] <= old_age_threshold) & (age_groups_df['max_age'] >= old_age_threshold)].index[0] + 1
+
+    # Load household data for each year
+    dfs_HH = {}
+    for year in years:
+        subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+        data_HH_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datamb.sas7bdat"
+        df, meta = pyreadstat.read_sas7bdat(data_HH_pathname)
+        df.columns = df.columns.str.lower()
+        if 'gil' in df.columns:
+            df.rename(columns={'gil': 'age_group'}, inplace=True)
+        dfs_HH[year] = df
+
+    # Load individual data for each year
+    dfs_IND = {}
+    for year in years:
+        subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+        data_IND_pathname = f"{cex_data_folder}{subfolder}/{subfolder}dataprat.sas7bdat"
+        df, meta = pyreadstat.read_sas7bdat(data_IND_pathname)
+        df.columns = df.columns.str.lower()
+        if 'gil' in df.columns:
+            df.rename(columns={'gil': 'age_group'}, inplace=True)
+        dfs_IND[year] = df
+
+    # Calculate the total number of misparmb for each year
+    total_misparmb = {}
+    for year in years:
+        total_misparmb[year] = dfs_HH[year]['misparmb'].nunique()
+
+    # Groups
+
+    # I: Demographic (Arabs, Haredi, Old, Young)
+    
+    # Arabs
+    arabs = {}
+    for year in years:
+        arabs[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 2]
+
+    # Haredi
+    haredi = {}
+    for year in years:
+        if year >= 2014:  # From 2014 the variable 'RamatDatiyut' is available
+            haredi[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 4]
+        else:  # If the indicator is not available, we will use the lack of television and studies in yeshiva as a proxy
+            haredi[year] = dfs_HH[year][dfs_HH[year]['television'] == 0]
+            haredi[year] = haredi[year].merge(
+                dfs_IND[year][dfs_IND[year]['l_school'] == 10], 
+                on='misparmb', 
+                how='inner'
+            )
+
+    # Young
+    young = {}
+    for year in years:
+        young[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] <= young_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
+
+    # Old
+    old = {}
+    for year in years:
+        old[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] >= old_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
+
+    demographics = {
+        'Arabs': arabs,
+        'Haredi': haredi,
+        'Young': young,
+        'Old': old,
+    }
+
+    # II: Income (Deciles 1-10)
+    
+    # Income deciles
+    income = {}
+    for decile in range(1, 11):
+        income[decile] = {}  # Initialize the dictionary for each decile
+        for year in years:
+            income[decile][year] = dfs_HH[year][dfs_HH[year]['decile'] == decile]
+
+    # III: Socioeconomic status (1-5)
+
+    # SES (socioeconomic status) of locality
+    SES_locality = {}
+    for ses in range(1, 6):
+        SES_locality[ses] = {}
+        for year in years:
+            SES_locality[ses][year] = dfs_HH[year][dfs_HH[year]['cluster'] == ses]
+
+
+    return demographics, income, SES_locality, total_misparmb
+
+def tri_grouping_extended(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/", 
+            young_age_cutoff=25, old_age_threshold=65, 
+            folder_names_pathname='Data_clean/CEX_folder_names.csv', 
+            age_groups_pathname='Data_clean/age_groups.csv'):
+    
+    import pandas as pd
+    import pyreadstat  
+
+    years = range(start_year, end_year + 1)
+
+    # Load folder names
+    folder_names_df = pd.read_csv(folder_names_pathname)
+
+    # Load age groups
+    age_groups_df = pd.read_csv(age_groups_pathname)
+    young_age_group_id = age_groups_df[(age_groups_df['min_age'] <= young_age_cutoff) & (age_groups_df['max_age'] >= young_age_cutoff)].index[0] + 1
+    old_age_group_id = age_groups_df[(age_groups_df['min_age'] <= old_age_threshold) & (age_groups_df['max_age'] >= old_age_threshold)].index[0] + 1
+
+    # Load household data for each year
+    dfs_HH = {}
+    for year in years:
+        subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+        data_HH_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datamb.sas7bdat"
+        df, meta = pyreadstat.read_sas7bdat(data_HH_pathname)
+        df.columns = df.columns.str.lower()
+        if 'gil' in df.columns:
+            df.rename(columns={'gil': 'age_group'}, inplace=True)
+        dfs_HH[year] = df
+
+    # Load individual data for each year
+    dfs_IND = {}
+    for year in years:
+        subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+        data_IND_pathname = f"{cex_data_folder}{subfolder}/{subfolder}dataprat.sas7bdat"
+        df, meta = pyreadstat.read_sas7bdat(data_IND_pathname)
+        df.columns = df.columns.str.lower()
+        if 'gil' in df.columns:
+            df.rename(columns={'gil': 'age_group'}, inplace=True)
+        dfs_IND[year] = df
+
+    # Calculate the total number of misparmb for each year
+    total_misparmb = {}
+    for year in years:
+        total_misparmb[year] = dfs_HH[year]['misparmb'].nunique()
+
+    # Groups
+
+    # I: Demographic (Arabs, Haredi, Old, Young)
+    
+    # Arabs
+    arabs = {}
+    for year in years:
+        arabs[year] = dfs_HH[year][dfs_HH[year]['nationality'] == 2]
 
     # Haredi
     haredi = {}
@@ -101,92 +320,46 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
         else:
             conservative[year] = None
 
-    # Mixed
-    mixed = {}
-    for year in years:
-        if year >= 2014:
-            mixed[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 5]
-        else:
-            mixed[year] = None
-
-
-    # # Other
-    # other_observance = {}
-    # for year in years:
-    #     if year >= 2014:
-    #         other_observance[year] = dfs_HH[year][dfs_HH[year]['ramatdatiyut'] == 6]
-    #     else:
-    #         other_observance[year] = None
- 
-    # Age (Young, Middle, Old)
-
     # Young
     young = {}
     for year in years:
         young[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] <= young_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
-
-    # Middle
-    middle = {}
-    for year in years:
-        middle[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] > young_age_group_id) & (dfs_IND[year]['age_group'] < old_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
 
     # Old
     old = {}
     for year in years:
         old[year] = dfs_HH[year][dfs_HH[year]['misparmb'].isin(dfs_IND[year][(dfs_IND[year]['age_group'] >= old_age_group_id) & (dfs_IND[year]['y_kalkali'] == 1)]['misparmb'])]
 
-    # Income 
-
-    income = {}
-    if income_groups == 'deciles':
-        for decile in range(1, 11):
-            income[decile] = {}  # Initialize the dictionary for each decile
-            for year in years:
-                income[decile][year] = dfs_HH[year][dfs_HH[year]['decile'] == decile]
-    else:
-        income = {quintile: {} for quintile in range(1, 6)}
-        for quintile in range(1, 6):
-            deciles = list(range((quintile - 1) * 2 + 1, quintile * 2 + 1))
-            for year in years:
-                income[quintile][year] = dfs_HH[year][dfs_HH[year]['decile'].isin(deciles)]
-
-
-    # Socioeconomic status 
-
-    SES_locality = {}
-    if ses_groups == 'quintiles':
-        for ses in range(1, 6):
-            SES_locality[ses] = {}
-            for year in years:
-                SES_locality[ses][year] = dfs_HH[year][dfs_HH[year]['cluster'] == ses]
-    else:
-        for tertile, clusters in enumerate([(1, 2), (3,), (4, 5)], start=1):
-            SES_locality[tertile] = {}
-            for year in years:
-                SES_locality[tertile][year] = dfs_HH[year][dfs_HH[year]['cluster'].isin(clusters)]
-
-    nationality = {
-        'Arab': arab,
-        'Jewish': jewish,
-        # 'Other': other
-    }
-
-    observance = {
+    demographics = {
         'Secular': secular,
         'Conservative': conservative,
         'Religious': religious,
         'Haredi': haredi,
-        'Mixed': mixed,
-        # 'Other': other_observance
-    }
-
-    age = {
+        'Arabs': arabs,
         'Young': young,
-        'Middle': middle,
-        'Old': old
+        'Old': old,
     }
 
-    return nationality, observance, income, SES_locality, age, total_misparmb
+    # II: Income (Deciles 1-10)
+    
+    # Income deciles
+    income = {}
+    for decile in range(1, 11):
+        income[decile] = {}  # Initialize the dictionary for each decile
+        for year in years:
+            income[decile][year] = dfs_HH[year][dfs_HH[year]['decile'] == decile]
+
+    # III: Socioeconomic status (1-5)
+
+    # SES (socioeconomic status) of locality
+    SES_locality = {}
+    for ses in range(1, 6):
+        SES_locality[ses] = {}
+        for year in years:
+            SES_locality[ses][year] = dfs_HH[year][dfs_HH[year]['cluster'] == ses]
+
+
+    return demographics, income, SES_locality, total_misparmb
 
 def get_n_obs(start_year, end_year, group_mmb=None, 
             cex_data_folder = '/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
@@ -430,7 +603,7 @@ def output_obs_table(start_year, end_year, groups_mmb):
     html_table = combined_df.to_html()
     display(HTML(html_table))
 
-def price_index_over_time(group_analysis, control_price_index = None):
+def price_index_over_time(group_analysis):
     import matplotlib.pyplot as plt
 
     # Extract yearly price indexes for each group
@@ -444,14 +617,6 @@ def price_index_over_time(group_analysis, control_price_index = None):
         plt.plot(years, indexes, label=group)
         for i, year in enumerate(years):
             plt.text(year, indexes[i], group, fontsize=8, ha='right')
-
-    if control_price_index is not None:
-        # Plot control price index
-        control_years = list(control_price_index.keys())
-        control_indexes = list(control_price_index.values())
-        plt.plot(control_years, control_indexes, label='Population', linestyle='--', color='black')
-        for i, year in enumerate(control_years):
-            plt.text(year, control_indexes[i], 'Population', fontsize=8, ha='right')
 
     plt.xlabel('Year')
     plt.ylabel('Price Index')
