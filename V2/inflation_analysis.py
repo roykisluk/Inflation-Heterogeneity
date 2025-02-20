@@ -1,3 +1,58 @@
+
+
+# Parameters
+start_year = 2019
+end_year = 2022
+top_n = 5
+comparison_level = 'primary'
+cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/"
+base_year = start_year
+comparison_year = end_year
+
+young_age_cutoff=25
+old_age_threshold=65
+income_groups = 'quintiles'
+ses_groups = 'tertiles',
+folder_names_pathname='Data_clean/CEX_folder_names.csv'
+age_groups_pathname='Data_clean/age_groups.csv'
+    
+import pandas as pd
+import pyreadstat  
+
+years = range(start_year, end_year + 1)
+
+# Load folder names
+folder_names_df = pd.read_csv(folder_names_pathname)
+
+# Load age groups
+age_groups_df = pd.read_csv(age_groups_pathname)
+young_age_group_id = age_groups_df[(age_groups_df['min_age'] <= young_age_cutoff) & (age_groups_df['max_age'] >= young_age_cutoff)].index[0] + 1
+old_age_group_id = age_groups_df[(age_groups_df['min_age'] <= old_age_threshold) & (age_groups_df['max_age'] >= old_age_threshold)].index[0] + 1
+
+# Load household data for each year
+dfs_HH = {}
+for year in years:
+    subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+    data_HH_pathname = f"{cex_data_folder}{subfolder}/{subfolder}datamb.sas7bdat"
+    df, meta = pyreadstat.read_sas7bdat(data_HH_pathname)
+    df.columns = df.columns.str.lower()
+    if 'gil' in df.columns:
+        df.rename(columns={'gil': 'age_group'}, inplace=True)
+    dfs_HH[year] = df
+
+# Load individual data for each year
+dfs_IND = {}
+for year in years:
+    subfolder = folder_names_df.loc[folder_names_df['Year'] == year, 'Folder_Name'].values[0]
+    data_IND_pathname = f"{cex_data_folder}{subfolder}/{subfolder}dataprat.sas7bdat"
+    df, meta = pyreadstat.read_sas7bdat(data_IND_pathname)
+    df.columns = df.columns.str.lower()
+    if 'gil' in df.columns:
+        df.rename(columns={'gil': 'age_group'}, inplace=True)
+    dfs_IND[year] = df
+
+
+
 def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/", 
             young_age_cutoff=25, old_age_threshold=65, income_groups = 'quintiles', ses_groups = 'tertiles',
             folder_names_pathname='Data_clean/CEX_folder_names.csv', 
