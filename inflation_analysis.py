@@ -165,6 +165,18 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
             for year in years:
                 SES_locality[tertile][year] = dfs_HH[year][dfs_HH[year]['cluster'].isin(clusters)]
 
+
+    # Family size
+    family_size = {
+        'no_children': {},
+        '1_to_3_children': {},
+        '4_plus_children': {}
+    }
+    for year in years:
+        family_size['no_children'][year] = dfs_HH[year][dfs_HH[year]['nefashotad18'] == 0]
+        family_size['1_to_3_children'][year] = dfs_HH[year][dfs_HH[year]['nefashotad18'].between(1, 3)]
+        family_size['4_plus_children'][year] = dfs_HH[year][dfs_HH[year]['nefashotad18'] >= 4]
+
     nationality = {
         'Arab': arab,
         'Jewish': jewish,
@@ -186,7 +198,7 @@ def grouping(start_year, end_year, cex_data_folder="/Users/roykisluk/Downloads/C
         'Old': old
     }
 
-    return nationality, observance, income, SES_locality, age, total_misparmb
+    return nationality, observance, income, SES_locality, age, family_size, total_misparmb
 
 def get_n_obs(start_year, end_year, group_mmb=None, 
             cex_data_folder = '/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
