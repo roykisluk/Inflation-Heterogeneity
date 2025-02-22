@@ -1,6 +1,6 @@
 
 \documentclass{beamer}
-\title{Analysis of CBS' Consumer Expenditure Survey}
+\title{Price Indexing Methodology and Analysis of the Consumer Expenditure Survey}
 \author{Roy Kisluk}
 \date{\today}
 
@@ -10,8 +10,215 @@
     \titlepage
 \end{frame}
 
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \item Our goal is to calculate consumption shares (weights) and price index for different demographics.
+        \item First, we group the households by different demographic characteristics.
+        \item Second, we calculate the consumption weights for each group.
+        \item Third, we calculate the Laspeyres index for each group.
+        \item Fourth, we explore the results.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Grouping}
+    \begin{itemize}
+        \item We group the households by characteristics that are available in the data.
+        \item Current groups include:
+              \begin{itemize}
+                  \item Nationality: Jewish, Arab, Other
+                  \item Religious Observance: Secular, Conservative, Religious, Ultra-Orthodox, Mixed, Other
+                  \item Age group: Young, Middle, Old
+                  \item Income deciles or quintiles
+                  \item Socioeconomic status of locality: quintiles or tertiles
+                  \item Family size: No children, 1 to 3, 4 or more
+              \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Household and Individual Data}
+    \begin{itemize}
+        \item Household-level data includes most of the demographic characteristics we need for grouping.
+    \end{itemize}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{c c c c}
+            \hline
+            \textbf{misparmb} & \textbf{decile} & \textbf{\ldots} & \textbf{nationality} \\
+            \hline
+            57090             & 7               & \ldots          & Jewish               \\
+            \hline
+            57091             & 1               & \ldots          & Arab                 \\
+            \hline
+            57092             & 3               & \ldots          & Other                \\
+            \hline
+        \end{tabular}
+        \label{tab:summary}
+    \end{table}
+    \begin{itemize}
+        \item Individual-level data gives us the age.
+    \end{itemize}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c c c c c c c}
+            \hline
+            S\_Seker & MisparMB & Prat & Weight  & Y\_Kirva & Y\_Kalkali & \ldots \\
+            \hline
+            2022     & 57089    & 1    & 411.796 & 1        & 1          &        \\
+            2022     & 57090    & 1    & 213.598 & 1        & 1          &        \\
+            2022     & 57090    & 2    & 213.598 & 2        & 2          &        \\
+            \hline
+        \end{tabular}
+        \label{tab:sample_data}
+    \end{table}
+\end{frame}
+
+
+
+\begin{frame}{Household and Individual Data}
+    \begin{itemize}
+        \item After grouping, we get a table with indicators per household ID (misparmb)
+    \end{itemize}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c c c c c}
+            \hline
+            misparmb & Nationality & Age\_Group & \ldots & Family\_Size \\
+            \hline
+            57089    & Jewish      & Old        &        & no children  \\
+            57090    & Jewish      & Old        &        & no children  \\
+            57091    & Jewish      & Middle     &        & 1 to 3       \\
+            57092    & Jewish      & Middle     &        & 1 to 3       \\
+            57093    & Arab        & Middle     &        & no children  \\
+            \hline
+        \end{tabular}
+        \label{tab:grouped_data}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Weights and Laspeyres Index}
+    \begin{itemize}
+        \item The goal now is to calculate the weights and Laspeyres index for each group:
+    \end{itemize}
+    $$
+        I_{ij}=\frac{P_{ij}}{P_{oj}}
+    $$
+    $$
+        W_{oj}=\frac{P_{oj}Q_{oj}}{\sum_{j\in L}P_{oj}Q_{oj}}
+    $$
+    $$
+        I_{i}=\sum_{j\in L}W_{oj}I_{ij}\times 100
+    $$
+    \begin{itemize}
+        \item $I_{i}$ - Index for the current period
+        \item $Q_{oj}$ - Quantity of the good or service in the base period
+        \item $P_{oj}$ - Price of the good or service in the base period
+        \item $P_{ij}$ - Price of the good or service in the current period
+        \item $L$ - The set of all goods and services in the index basket
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Expenditure Data}
+    \begin{itemize}
+        \item Expenses data gives us the total expenditure on each product for each household. This is useful for calculating the weights. When looking at the base year, $Schum_{oj} = P_{oj}Q_{oj}$
+    \end{itemize}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c c c c}
+            \hline
+            \textbf{misparmb} & \textbf{prodcode} & \textbf{schum} \\
+            \hline
+            57089             & 304170            & 5357.0         \\
+            57089             & 304139            & 5160.0         \\
+            57089             & 381012            & 723.0          \\
+            57089             & 304014            & 4634.0         \\
+            57089             & 304303            & 1259.0         \\
+            \hline
+        \end{tabular}
+        \label{tab:expenses_table}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Survey Data}
+    \begin{itemize}
+        \item Survey data lets us estimate the price paid per unit of product. The variable $mehir$ represents the total expenditure on the product, as reported in the survey. $kamut$ represents the quantity of the product purchased.
+    \end{itemize}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c c c c}
+            \hline
+            \textbf{misparmb} & \textbf{prodcode} & \textbf{kamut} & \textbf{mehir} \\
+            \hline
+            57089             & 304170            & 1.0            & 18.0           \\
+            57089             & 304139            & 2.0            & 4.0            \\
+            57089             & 381012            & 1.0            & 44.0           \\
+            57089             & 304014            & 1.0            & 6.0            \\
+            57089             & 304303            & 18.0           & 18.0           \\
+            \hline
+        \end{tabular}
+        \label{tab:survey_table}
+    \end{table}
+    \begin{itemize}
+        \item We can calculate the change in price for each product in the following way: we first divide $mehir$ by $kamut$ to get the price paid per unit, and then divide the current price by the base price.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Weights and Prices}
+    \begin{itemize}
+        \item We then get the following table, per year, per group:
+    \end{itemize}
+    \begin{tabular}{c c c c c}
+        \hline
+        \textbf{prodecode} & \textbf{weight} & \textbf{price} & \textbf{price\_base} & \textbf{price\_ratio} \\
+        \hline
+        300012             & 0.00024         & 6.21223        & 5.41153              & 1.14796               \\
+        \hline
+        300038             & 0.00055         & 7.54942        & 6.92654              & 1.08993               \\
+        \hline
+        300046             & 0.00173         & 13.10342       & 11.10066             & 1.18042               \\
+        \hline
+        300053             & 0.00087         & 9.57874        & 7.63743              & 1.25418               \\
+        \hline
+        300061             & 0.00151         & 6.25478        & 3.28928              & 1.90156               \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Laspeyres Index}
+    \begin{itemize}
+        \item We can then calculate the Laspeyres index for each group, by multiplying the weights by the price ratio and summing the results.
+    \end{itemize}
+    \begin{table}
+        \begin{tabular}{c c c c c c}
+            \hline
+            \textbf{year} & \textbf{Secular} & \textbf{Conservative} & \textbf{Religious} & \textbf{Ultra-Orthodox} \\
+            \hline
+            2015          & 100.0            & 100.0                 & 100.0              & 100.0                   \\
+            \hline
+            2016          & 93.810           & 110.314               & 179.672            & 107.349                 \\
+            \hline
+            2017          & 98.875           & 102.746               & 110.247            & 102.271                 \\
+            \hline
+            2018          & 96.980           & 106.899               & 115.896            & 105.129                 \\
+            \hline
+            2019          & 102.574          & 108.910               & 121.337            & 103.093                 \\
+            \hline
+            2020          & 104.316          & 119.343               & 109.186            & 107.523                 \\
+            \hline
+            2021          & 107.229          & 115.962               & 107.235            & 114.162                 \\
+            \hline
+            2022          & 117.634          & 123.351               & 124.757            & 117.745                 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{itemize}
+        \item Further exploration and analysis of the data is shown separately.
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Overview}
     \begin{itemize}
+        \item In the following slides we take a look at the main variables available in the data
         \item The Consumer Expenditure Survey provides rich data for analyzing group-level inflation
         \item Contains detailed information on:
               \begin{itemize}
