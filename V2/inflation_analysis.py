@@ -1,5 +1,4 @@
 
-
 def calculate_price_indexes(start_year, end_year, base_year, group_mmb = None, factor = 1, 
                             cex_data_folder = '/Users/roykisluk/Downloads/Consumer_Expenditure_Survey/', 
                             folder_names_pathname = 'Data_clean/CEX_folder_names.csv', 
