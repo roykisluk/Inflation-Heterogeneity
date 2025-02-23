@@ -12,8 +12,8 @@
 
 \begin{frame}{Introduction}
     \begin{itemize}
-        \item Our goal is to calculate consumption shares (weights) and price index for different demographics.
-        \item First, we group the households by different demographic characteristics.
+        \item Our goal is to calculate consumption shares (weights) and price indexes for different demographics.
+        \item First, we group households by different demographic characteristics.
         \item Second, we calculate the consumption weights for each group.
         \item Third, we calculate the Laspeyres index for each group.
         \item Fourth, we explore the results.
@@ -27,7 +27,7 @@
               \begin{itemize}
                   \item Nationality: Jewish, Arab, Other
                   \item Religious Observance: Secular, Conservative, Religious, Ultra-Orthodox, Mixed, Other
-                  \item Age group: Young, Middle, Old
+                  \item Age group of HHH: Young (18-25), Middle (26-64), Old (65+)
                   \item Income deciles or quintiles
                   \item Socioeconomic status of locality: quintiles or tertiles
                   \item Family size: No children, 1 to 3, 4 or more
@@ -120,7 +120,7 @@
 
 \begin{frame}{Expenditure Data}
     \begin{itemize}
-        \item Expenses data gives us the total expenditure on each product for each household. This is useful for calculating the weights. When looking at the base year, $Schum_{oj} = P_{oj}Q_{oj}$
+        \item Expenses data gives us the total expenditure on each product for each household. This is useful for calculating the weights. When looking at the base year: $Schum_{oj} = P_{oj}Q_{oj}$
     \end{itemize}
     \begin{table}[h]
         \centering
@@ -142,6 +142,7 @@
 \begin{frame}{Survey Data}
     \begin{itemize}
         \item Survey data lets us estimate the price paid per unit of product. The variable $mehir$ represents the total expenditure on the product, as reported in the survey. $kamut$ represents the quantity of the product purchased.
+        \item Using these variables, we can divide $mehir$ by $kamut$ to get the price paid per unit.
     \end{itemize}
     \begin{table}[h]
         \centering
@@ -159,13 +160,13 @@
         \label{tab:survey_table}
     \end{table}
     \begin{itemize}
-        \item We can calculate the change in price for each product in the following way: we first divide $mehir$ by $kamut$ to get the price paid per unit, and then divide the current price by the base price.
+        \item We can then calculate the price index for each product $j$ by dividing the current price by the base price: $I_{ij}=\frac{P_{ij}}{P_{oj}}$
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Weights and Prices}
     \begin{itemize}
-        \item We then get the following table, per year, per group:
+        \item We get the following table, per year, per group:
     \end{itemize}
     \begin{tabular}{c c c c c}
         \hline
@@ -186,7 +187,7 @@
 
 \begin{frame}{Laspeyres Index}
     \begin{itemize}
-        \item We can then calculate the Laspeyres index for each group, by multiplying the weights by the price ratio and summing the results.
+        \item We can then calculate the Laspeyres index for each group, by multiplying the weights by the price ratio and summing the results: $I_{i}=\sum_{j\in L}W_{oj}I_{ij}\times 100$
     \end{itemize}
     \begin{table}
         \begin{tabular}{c c c c c c}
