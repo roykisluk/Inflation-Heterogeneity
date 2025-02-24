@@ -98,22 +98,22 @@
 
 \begin{frame}{Weights and Laspeyres Index}
     \begin{itemize}
-        \item The goal now is to calculate the weights and Laspeyres index for each group:
+        \item The goal now is to calculate the weights and Laspeyres index for each group. For good $j$, at time $t$:
     \end{itemize}
     $$
-        I_{ij}=\frac{P_{ij}}{P_{oj}}
+        I_{tj}=\frac{P_{tj}}{P_{oj}}
     $$
     $$
         W_{oj}=\frac{P_{oj}Q_{oj}}{\sum_{j\in L}P_{oj}Q_{oj}}
     $$
     $$
-        I_{i}=\sum_{j\in L}W_{oj}I_{ij}\times 100
+        I_{t}=\sum_{j\in L}W_{oj}I_{tj}\times 100
     $$
     \begin{itemize}
-        \item $I_{i}$ - Index for the current period
+        \item $I_{t}$ - Index for period $t$
         \item $Q_{oj}$ - Quantity of the good or service in the base period
         \item $P_{oj}$ - Price of the good or service in the base period
-        \item $P_{ij}$ - Price of the good or service in the current period
+        \item $P_{tj}$ - Price of the good or service in period $t$
         \item $L$ - The set of all goods and services in the index basket
     \end{itemize}
 \end{frame}
@@ -160,7 +160,7 @@
         \label{tab:survey_table}
     \end{table}
     \begin{itemize}
-        \item We can then calculate the price index for each product $j$ by dividing the current price by the base price: $I_{ij}=\frac{P_{ij}}{P_{oj}}$
+        \item We can then calculate the price index for each product $j$ by dividing the current price by the base price: $I_{tj}=\frac{P_{tj}}{P_{oj}}$
     \end{itemize}
 \end{frame}
 
@@ -187,7 +187,7 @@
 
 \begin{frame}{Laspeyres Index}
     \begin{itemize}
-        \item We can then calculate the Laspeyres index for each group, by multiplying the weights by the price ratio and summing the results: $I_{i}=\sum_{j\in L}W_{oj}I_{ij}\times 100$
+        \item We can then calculate the Laspeyres index for each group, by multiplying the weights by the price ratio and summing the results: $I_{t}=\sum_{j\in L}W_{oj}I_{tj}\times 100$
     \end{itemize}
     \begin{table}
         \begin{tabular}{c c c c c c}
